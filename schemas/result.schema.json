@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M5 Result Schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$"
+    },
+    "run_id": { "type": "string" },
+    "simulator_version": { "type": "string" },
+    "qubits": { "type": "integer", "minimum": 1 },
+    "shots": { "type": "integer", "minimum": 1 },
+    "seed": { "type": ["integer", "null"] },
+    "probabilities": {
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 }
+    },
+    "histogram": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "result_label": { "const": "SIMULATION" }
+  },
+  "required": [
+    "version", "run_id", "simulator_version", "qubits",
+    "shots", "seed", "probabilities", "histogram", "result_label"
+  ],
+  "additionalProperties": false
+}

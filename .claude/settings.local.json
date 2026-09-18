@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(pip install *)",
+      "PowerShell(python -m pytest tests/test_validation.py tests/test_gates.py)",
+      "PowerShell(python -m pytest tests/test_validation.py tests/test_gates.py tests/test_statevector.py)"
+    ]
+  }
+}

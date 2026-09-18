@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M5 Run Schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+$"
+    },
+    "run_id": { "type": "string" },
+    "simulator_version": { "type": "string" },
+    "timestamps": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date-time" },
+        "end": { "type": "string", "format": "date-time" }
+      },
+      "required": ["start", "end"],
+      "additionalProperties": false
+    },
+    "status": { "type": "string" },
+    "checksums": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "result_label": { "const": "SIMULATION" }
+  },
+  "required": [
+    "version", "run_id", "simulator_version", "timestamps",
+    "status", "checksums", "result_label"
+  ],
+  "additionalProperties": false
+}
