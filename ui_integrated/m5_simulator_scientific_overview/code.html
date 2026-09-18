@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>M5 Simulator — Deterministic Quantum Execution</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "inverse-surface": "#232320",
+        "surface-container-low": "#f7f5f0",
+        "on-surface-variant": "#57564f",
+        "error-container": "#ffdad6",
+        "on-primary": "#ffffff",
+        "surface-tint": "#5f5e5c",
+        "surface-variant": "#ebe8e2",
+        "surface-container-high": "#ebe7e0",
+        "on-surface": "#1a1a18",
+        "secondary": "#a63d23",
+        "on-background": "#1a1a18",
+        "surface-container": "#f2efe8",
+        "background": "#faf8f4",
+        "primary": "#111110",
+        "surface": "#faf8f4",
+        "paper-base": "#faf8f4",
+        "paper-subtle": "#f3f0e8",
+        "slate-rule": "#d8d3c7",
+        "border-hairline": "#e4dfd5",
+        "ink-primary": "#181816",
+        "ink-muted": "#6b6961",
+        "terracotta-accent": "#af3e24",
+        "outline-variant": "#d5d0c4"
+      },
+      fontFamily: {
+        "display-hero": ["Newsreader", "serif"],
+        "headline-lg": ["Newsreader", "serif"],
+        "headline-md": ["Newsreader", "serif"],
+        "headline-sm": ["Newsreader", "serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "body-sm": ["Inter", "sans-serif"],
+        "meta-label": ["JetBrains Mono", "monospace"],
+        "data-metric": ["JetBrains Mono", "monospace"]
+      }
+    }
+  }
+};</script><style>@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #faf8f4;
+  }
+  body {
+    overscroll-behavior-y: none;
+  }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+}
+::-webkit-scrollbar { display: none; }
+.fine-line-card {
+  border: 0.75px solid #e2ddd4;
+}
+.fine-divider {
+  border-color: #e4dfd5;
+}
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-[#faf8f4] text-[#1a1a18] antialiased selection:bg-[#f0e7dc] selection:text-[#181816]"><header class="fixed top-0 w-full z-50 bg-[#faf8f4]/90 backdrop-blur-md border-b border-[#e6e1d7] pt-safe"><div class="h-14 px-4 flex items-center justify-between"><div class="flex items-center gap-2"><span class="font-display-hero text-[19px] tracking-wide text-ink-primary font-normal">M5 SIMULATOR</span><span class="font-meta-label text-[9px] tracking-[0.14em] uppercase px-1.5 py-0.5 rounded-sm bg-[#ede8de] text-ink-muted border border-[#dfd9cc]">SIMULATION</span></div><div class="flex items-center gap-2.5"><span class="font-meta-label text-[10px] tracking-wider text-ink-muted flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#181816]"></span>STANDALONE</span><span class="font-meta-label text-[10px] tracking-wider text-ink-muted bg-[#ede9e0] px-1.5 py-0.5 rounded border border-[#dfd8cc]">SLOTS: 1/4</span></div></div></header><main class="flex flex-col relative w-full pt-14 pb-24 bg-[#faf8f4] min-h-screen"><div class="px-4 pt-7 pb-5 flex flex-col gap-2 border-b border-[#e9e4da]"><div class="flex items-center justify-between"><span class="font-meta-label text-[10px] uppercase tracking-[0.16em] text-terracotta-accent font-medium">Tome IV // Theoretical Monograph</span><span class="font-meta-label text-[10px] text-ink-muted tracking-tight">EIGEN-SYS • ARCHIVAL BUILD</span></div><h1 class="font-display-hero text-[34px] sm:text-[38px] leading-[1.12] tracking-[-0.02em] text-ink-primary font-normal">Deterministic quantum execution on bounded silicon.</h1><p class="font-body-md text-[14px] leading-relaxed text-ink-muted pt-1 max-w-xl">Strict state vector evolution compile-checked against local physical constraints. Invariant seeds guarantee exact bit-parity across all host architectures.</p><div class="flex items-center gap-3 pt-3"><a class="inline-flex items-center gap-2 bg-[#181816] text-[#faf8f4] px-4 py-2.5 rounded text-[13px] font-meta-label tracking-wide uppercase shadow-sm transition hover:bg-[#2c2b27] active:scale-[0.98]" href="#workspace" data-path="workspace"><span class="material-symbols-outlined text-[16px]">terminal</span><span>Open Workspace</span></a><a class="inline-flex items-center gap-2 bg-[#ede9df] text-ink-primary px-3.5 py-2.5 rounded text-[13px] font-meta-label tracking-wide uppercase border border-[#ddd6c7] transition hover:bg-[#e4ded2] active:scale-[0.98]" href="#workspace" data-path="workspace"><span class="material-symbols-outlined text-[16px]">tune</span><span>Configure PRNG</span></a></div></div><div class="py-6 border-b border-[#e9e4da] bg-[#faf8f4]"><div class="px-4 flex items-center justify-between pb-3"><div class="flex flex-col"><span class="font-meta-label text-[10px] uppercase tracking-[0.18em] text-ink-muted">TECHNICAL ROADMAP</span><h2 class="font-headline-md text-[21px] text-ink-primary tracking-tight font-normal">From State Vector to M5 Architecture</h2></div><span class="font-meta-label text-[10px] tracking-widest text-[#8a5d4d] uppercase border border-[#e4cbbf] bg-[#faf0eb] px-2 py-0.5 rounded">6 PHASES</span></div><div class="overflow-x-auto no-scrollbar px-4 pb-2 pt-1"><div class="min-w-[760px] flex flex-col"><div class="grid grid-cols-4 gap-4 pb-4 items-end"><div class="flex flex-col items-center text-center p-2 rounded bg-[#f5f1e8]/60 border border-[#eae4d8]"><div class="w-full h-36 flex items-center justify-center">
+<svg class="w-28 h-28 text-[#262624]" fill="none" stroke="currentColor" stroke-width="0.9" viewbox="0 0 120 120">
+<!-- Outer circle -->
+<circle cx="60" cy="60" r="46" stroke-dasharray="2 2" stroke-opacity="0.35"></circle>
+<circle cx="60" cy="60" r="46"></circle>
+<!-- Equator ellipse -->
+<ellipse cx="60" cy="60" rx="46" ry="14" stroke-dasharray="3 2"></ellipse>
+<!-- Meridian ellipse -->
+<ellipse cx="60" cy="60" rx="18" ry="46" stroke-opacity="0.5"></ellipse>
+<!-- Z axis -->
+<line stroke-width="1.1" x1="60" x2="60" y1="8" y2="112"></line>
+<!-- State vector arrow pointing in superposition -->
+<line stroke="#af3e24" stroke-width="1.4" x1="60" x2="94" y1="60" y2="38"></line>
+<polygon fill="#af3e24" points="94,38 88,43 90,48"></polygon>
+<!-- Polar labels -->
+<text fill="#262624" font-family="JetBrains Mono" font-size="8" stroke="none" x="64" y="16">|0⟩</text>
+<text fill="#262624" font-family="JetBrains Mono" font-size="8" stroke="none" x="64" y="112">|1⟩</text>
+<text fill="#af3e24" font-family="JetBrains Mono" font-size="7.5" font-weight="bold" stroke="none" x="96" y="38">|Ψ⟩</text>
+</svg>
+</div><span class="font-meta-label text-[10px] tracking-wider uppercase text-ink-muted pt-2">MILESTONE 1</span><span class="font-headline-sm text-[14px] text-ink-primary font-normal">Bloch Evolution</span><span class="font-meta-label text-[10px] text-ink-muted mt-1">Width: 1 Qubit Pure</span><span class="font-meta-label text-[10px] text-ink-muted">Analytic Eigen-Vector</span></div><div class="flex flex-col items-center text-center p-2 rounded bg-[#f5f1e8]/60 border border-[#eae4d8]"><div class="w-full h-36 flex items-center justify-center">
+<svg class="w-32 h-32 text-[#262624]" fill="none" stroke="currentColor" stroke-width="0.9" viewbox="0 0 140 130">
+<!-- Isometric base slab -->
+<polygon fill="#ede7dc" fill-opacity="0.3" points="70,25 125,55 70,88 15,55"></polygon>
+<polygon fill="#e2dacb" fill-opacity="0.5" points="15,55 70,88 70,98 15,65"></polygon>
+<polygon fill="#d5cbba" fill-opacity="0.5" points="125,55 70,88 70,98 125,65"></polygon>
+<!-- Grid of 9 cylindrical physical qubit studs (3x3) -->
+<!-- Row 1 -->
+<ellipse cx="48" cy="48" rx="6" ry="3.2"></ellipse>
+<ellipse cx="70" cy="38" rx="6" ry="3.2"></ellipse>
+<ellipse cx="92" cy="48" rx="6" ry="3.2"></ellipse>
+<!-- Row 2 -->
+<ellipse cx="48" cy="62" rx="6" ry="3.2"></ellipse>
+<ellipse cx="70" cy="52" rx="6" ry="3.2" stroke="#af3e24" stroke-width="1.2"></ellipse>
+<ellipse cx="92" cy="62" rx="6" ry="3.2"></ellipse>
+<!-- Row 3 -->
+<ellipse cx="48" cy="76" rx="6" ry="3.2"></ellipse>
+<ellipse cx="70" cy="66" rx="6" ry="3.2"></ellipse>
+<ellipse cx="92" cy="76" rx="6" ry="3.2"></ellipse>
+<!-- Coupling lattice dashes -->
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="48" x2="70" y1="48" y2="38"></line>
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="70" x2="92" y1="38" y2="48"></line>
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="48" x2="70" y1="62" y2="52"></line>
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="70" x2="92" y1="52" y2="62"></line>
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="48" x2="70" y1="76" y2="66"></line>
+<line stroke-dasharray="2 2" stroke-opacity="0.6" x1="70" x2="70" y1="38" y2="66"></line>
+</svg>
+</div><span class="font-meta-label text-[10px] tracking-wider uppercase text-ink-muted pt-2">MILESTONE 2</span><span class="font-headline-sm text-[14px] text-ink-primary font-normal">Planar Coupling</span><span class="font-meta-label text-[10px] text-ink-muted mt-1">Width: Up to 4 Qubits</span><span class="font-meta-label text-[10px] text-ink-muted">Nearest-Neighbor CX</span></div><div class="flex flex-col items-center text-center p-2 rounded bg-[#f5f1e8]/60 border border-[#eae4d8]"><div class="w-full h-36 flex items-center justify-center">
+<svg class="w-32 h-32 text-[#262624]" fill="none" stroke="currentColor" stroke-width="0.85" viewbox="0 0 140 130">
+<!-- Isometric surface code tile with emitter field -->
+<polygon fill="#ede7dc" fill-opacity="0.35" points="70,42 125,72 70,102 15,72"></polygon>
+<polygon fill="#ded6c5" fill-opacity="0.6" points="15,72 70,102 70,111 15,81"></polygon>
+<polygon fill="#d0c6b3" fill-opacity="0.6" points="125,72 70,102 70,111 125,81"></polygon>
+<!-- 4x4 array of dots -->
+<circle cx="45" cy="65" fill="currentColor" r="1.4"></circle>
+<circle cx="58" cy="58" fill="currentColor" r="1.4"></circle>
+<circle cx="70" cy="51" fill="currentColor" r="1.4"></circle>
+<circle cx="83" cy="58" fill="currentColor" r="1.4"></circle>
+<circle cx="95" cy="65" fill="currentColor" r="1.4"></circle>
+<circle cx="58" cy="72" fill="currentColor" r="1.4"></circle>
+<circle cx="70" cy="65" fill="#af3e24" r="2.2"></circle>
+<circle cx="83" cy="72" fill="currentColor" r="1.4"></circle>
+<circle cx="70" cy="79" fill="currentColor" r="1.4"></circle>
+<circle cx="58" cy="86" fill="currentColor" r="1.4"></circle>
+<circle cx="83" cy="86" fill="currentColor" r="1.4"></circle>
+<!-- Vertical measurement / syndrome rays (inspired by reference) -->
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="45" x2="45" y1="65" y2="28"></line>
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="58" x2="58" y1="58" y2="18"></line>
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="70" x2="70" y1="51" y2="10"></line>
+<line stroke="#af3e24" stroke-dasharray="1.5 2" x1="70" x2="70" y1="65" y2="16"></line>
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="83" x2="83" y1="58" y2="18"></line>
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="95" x2="95" y1="65" y2="28"></line>
+<line stroke-dasharray="1.5 2" stroke-opacity="0.7" x1="70" x2="70" y1="79" y2="34"></line>
+</svg>
+</div><span class="font-meta-label text-[10px] tracking-wider uppercase text-ink-muted pt-2">MILESTONE 3</span><span class="font-headline-sm text-[14px] text-ink-primary font-normal">Syndrome Patch</span><span class="font-meta-label text-[10px] text-ink-muted mt-1">Width: 6 Qubits</span><span class="font-meta-label text-[10px] text-ink-muted">Kraus Damping Layer</span></div><div class="flex flex-col items-center text-center p-2 rounded bg-[#f3ede1] border-2 border-[#181816] relative"><div class="absolute -top-2.5 bg-[#181816] text-[#faf8f4] font-meta-label text-[9px] uppercase tracking-widest px-2 py-0.5 rounded shadow-sm">ACTIVE // FOCUS</div><div class="w-full h-36 flex items-center justify-center">
+<svg class="w-32 h-32 text-[#262624]" fill="none" stroke="currentColor" stroke-width="0.85" viewbox="0 0 140 130">
+<!-- Monolithic Dual-Core Simulator Unit with Bus Interconnect -->
+<polygon fill="#e6decf" fill-opacity="0.6" points="48,45 88,25 88,40 48,60"></polygon>
+<!-- Block A: High register -->
+<polygon fill="#f7f3ec" points="25,48 55,33 80,45 50,60"></polygon>
+<polygon fill="#dcd3c2" points="25,48 50,60 50,78 25,66"></polygon>
+<polygon fill="#ccc1ae" points="80,45 50,60 50,78 80,63"></polygon>
+<!-- Block B: Dedicated PRNG cache -->
+<polygon fill="#f7f3ec" points="62,68 92,53 117,65 87,80"></polygon>
+<polygon fill="#dcd3c2" points="62,68 87,80 87,98 62,86"></polygon>
+<polygon fill="#ccc1ae" points="117,65 87,80 87,98 117,83"></polygon>
+<!-- Connecting bus conduit -->
+<line stroke="#af3e24" stroke-width="1.5" x1="50" x2="87" y1="69" y2="74"></line>
+<!-- Precision needle/register probe -->
+<line stroke="#181816" stroke-width="1.1" x1="53" x2="53" y1="46" y2="15"></line>
+<circle cx="53" cy="15" fill="#af3e24" r="2.5"></circle>
+<line stroke="#181816" stroke-width="1.1" x1="90" x2="90" y1="66" y2="30"></line>
+<circle cx="90" cy="30" fill="#181816" r="2"></circle>
+<!-- Precision tick lines -->
+<path d="M40,51 L44,53 M45,48 L49,50 M75,71 L79,73 M80,68 L84,70" stroke-width="0.75"></path>
+</svg>
+</div><span class="font-meta-label text-[10px] tracking-wider uppercase text-terracotta-accent font-semibold pt-2">MILESTONE 5</span><span class="font-headline-sm text-[14px] text-ink-primary font-medium">M5 Simulator</span><span class="font-meta-label text-[10px] text-ink-primary font-medium mt-1">Width: Strictly 8 Qubits</span><span class="font-meta-label text-[10px] text-terracotta-accent font-medium">Deterministic PRNG</span></div></div><div class="relative w-full pt-1 pb-2"><div class="h-[1.5px] w-full bg-[#dfd9cc] absolute top-3 left-0"></div><div class="grid grid-cols-4 relative z-10"><div class="flex flex-col items-center"><div class="w-3.5 h-3.5 rounded-full bg-[#faf8f4] border-2 border-[#a49f94]"></div><span class="font-meta-label text-[10px] text-ink-muted mt-2">v0.1 Alpha</span></div><div class="flex flex-col items-center"><div class="w-3.5 h-3.5 rounded-full bg-[#faf8f4] border-2 border-[#a49f94]"></div><span class="font-meta-label text-[10px] text-ink-muted mt-2">v0.4 Matrix</span></div><div class="flex flex-col items-center"><div class="w-3.5 h-3.5 rounded-full bg-[#faf8f4] border-2 border-[#a49f94]"></div><span class="font-meta-label text-[10px] text-ink-muted mt-2">v0.8 Noise</span></div><div class="flex flex-col items-center"><div class="w-3.5 h-3.5 rounded-full bg-[#181816] border-2 border-[#181816]"></div><span class="font-meta-label text-[10px] text-ink-primary font-bold mt-2">v1.0 Bound</span></div></div></div></div></div></div><div class="px-4 py-6 border-b border-[#e9e4da]"><div class="flex items-center justify-between mb-3"><span class="font-meta-label text-[10px] uppercase tracking-[0.16em] text-ink-muted">ARCHITECTURAL BOUNDS</span><span class="font-meta-label text-[10px] uppercase tracking-wider text-ink-muted">STRICT INVARIANTS</span></div><div class="grid grid-cols-2 divide-x divide-y divide-[#e4dfd5] border border-[#e4dfd5] rounded bg-[#faf8f4] overflow-hidden"><div class="p-3.5 flex flex-col gap-0.5"><span class="font-meta-label text-[9.5px] tracking-wider uppercase text-ink-muted">BOUND 01 // RUNTIME</span><span class="font-headline-sm text-[16px] text-ink-primary font-normal">Offline &amp; Local</span><span class="font-meta-label text-[10.5px] text-ink-muted">In-process thread memory</span></div><div class="p-3.5 flex flex-col gap-0.5"><span class="font-meta-label text-[9.5px] tracking-wider uppercase text-ink-muted">BOUND 02 // CAPACITY</span><span class="font-headline-sm text-[16px] text-ink-primary font-normal">Max 8 Qubits</span><span class="font-meta-label text-[10.5px] text-ink-muted">256 state vector amplitudes</span></div><div class="p-3.5 flex flex-col gap-0.5"><span class="font-meta-label text-[9.5px] tracking-wider uppercase text-ink-muted">BOUND 03 // CONCURRENCY</span><span class="font-headline-sm text-[16px] text-ink-primary font-normal">4 Task Slots</span><span class="font-meta-label text-[10.5px] text-ink-muted">Isolated worker pools</span></div><div class="p-3.5 flex flex-col gap-0.5"><span class="font-meta-label text-[9.5px] tracking-wider uppercase text-ink-muted">BOUND 04 // REPRODUCIBILITY</span><span class="font-headline-sm text-[16px] text-ink-primary font-normal">Seeded PRNG</span><span class="font-meta-label text-[10.5px] text-ink-muted">Deterministic sample paths</span></div></div></div><div class="px-4 py-6 border-b border-[#e9e4da] bg-[#f5f2ea]/40"><div class="flex items-center justify-between pb-3"><div class="flex items-center gap-2"><span class="font-meta-label text-[10px] text-ink-muted uppercase tracking-wider">FIG 01.</span><h2 class="font-headline-sm text-[18px] text-ink-primary font-normal">Canonical Bell-State Verification</h2></div><span class="font-meta-label text-[10px] uppercase tracking-wider text-terracotta-accent bg-[#f8ece7] border border-[#ebd2c7] px-2 py-0.5 rounded">SIMULATION VERIFIED</span></div><div class="bg-[#faf8f4] border border-[#e2ddd4] rounded p-4 flex flex-col gap-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]"><div class="flex items-center justify-between pb-2 border-b border-[#ece7dc] font-meta-label text-[11px]"><span class="text-ink-primary font-medium tracking-tight">CIRCUIT: H(q0) • CX(q0, q1)</span><span class="text-ink-muted">N = 8,192 SHOTS</span></div><div class="flex flex-col gap-3 font-meta-label text-[12px]"><div class="flex flex-col gap-1.5"><div class="flex justify-between items-center"><span class="text-ink-primary font-normal">|00⟩ Ground Coincidence</span><span class="text-terracotta-accent tabular-nums font-semibold" id="val-00">0.5000</span></div><div class="w-full h-1.5 bg-[#ece7dd] rounded-full overflow-hidden"><div class="h-full bg-terracotta-accent transition-all duration-300" style="width: 50%;"></div></div></div><div class="flex flex-col gap-1.5 opacity-35"><div class="flex justify-between items-center"><span class="text-ink-muted">|01⟩ Null Leakage</span><span class="text-ink-muted tabular-nums">0.0000</span></div><div class="w-full h-1 bg-[#ece7dd] rounded-full overflow-hidden"><div class="h-full bg-[#8c887e]" style="width: 0%;"></div></div></div><div class="flex flex-col gap-1.5 opacity-35"><div class="flex justify-between items-center"><span class="text-ink-muted">|10⟩ Null Leakage</span><span class="text-ink-muted tabular-nums">0.0000</span></div><div class="w-full h-1 bg-[#ece7dd] rounded-full overflow-hidden"><div class="h-full bg-[#8c887e]" style="width: 0%;"></div></div></div><div class="flex flex-col gap-1.5"><div class="flex justify-between items-center"><span class="text-ink-primary font-normal">|11⟩ Excited Coincidence</span><span class="text-terracotta-accent tabular-nums font-semibold" id="val-11">0.5000</span></div><div class="w-full h-1.5 bg-[#ece7dd] rounded-full overflow-hidden"><div class="h-full bg-terracotta-accent transition-all duration-300" style="width: 50%;"></div></div></div></div><div class="flex items-center justify-between pt-2 border-t border-[#ece7dc]"><button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#ede9e0] hover:bg-[#e4dfd4] border border-[#ddd6c7] font-meta-label text-[11px] text-ink-primary uppercase tracking-wider transition active:scale-95" id="perturb-btn" type="button"><span class="material-symbols-outlined text-[14px] text-terracotta-accent">science</span><span>Sample Perturbation</span></button><span class="font-meta-label text-[11px] text-ink-muted" id="fidelity-label">State Fidelity: 1.0000</span></div></div></div><div class="px-4 py-6 border-b border-[#e9e4da]"><div class="flex flex-col gap-0.5 pb-4"><span class="font-meta-label text-[10px] uppercase tracking-[0.18em] text-ink-muted">DETERMINISTIC PIPELINE</span><h2 class="font-headline-md text-[20px] text-ink-primary font-normal">Six Immutable Execution Stages</h2></div><div class="flex flex-col divide-y divide-[#ece7dc] border border-[#e4dfd5] rounded bg-[#faf8f4] overflow-hidden"><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">01</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Input Circuit Assembly</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Parses OpenQASM or abstract gate arrays mapped across declared registers.</span></div></div><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">02</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Validate Configuration</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Assesses width (N ≤ 8) and memory budgets before state vector allocation.</span></div></div><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">03</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Execute Ideal Evolution</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Exact complex unitary matrix evolution compiled directly across pure states.</span></div></div><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">04</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Apply Declared Noise</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Injects deterministic Kraus operators and phase damping strictly if requested.</span></div></div><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">05</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Sample Finite Shots</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Draws pseudorandom samples strictly against cumulative distribution vectors.</span></div></div><div class="flex gap-3.5 p-3.5"><span class="font-meta-label text-[12px] text-terracotta-accent font-semibold w-5 shrink-0 pt-0.5">06</span><div class="flex flex-col"><span class="font-meta-label text-[12px] text-ink-primary font-medium uppercase tracking-wide">Finalize Result Package</span><span class="font-body-sm text-[12.5px] leading-normal text-ink-muted mt-0.5">Records seed metadata, execution telemetry, and byte checksums into immutable log.</span></div></div></div></div><div class="px-4 py-6"><div class="bg-[#181816] text-[#faf8f4] p-4 rounded border border-[#2c2c28] flex flex-col gap-3"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-terracotta-accent">shield</span><span class="font-meta-label text-[10px] tracking-widest uppercase text-[#c5beb1]">HARD INVARIANT GUARANTEE</span></div><span class="font-meta-label text-[9px] uppercase px-1.5 py-0.5 rounded bg-[#b8381b]/20 text-[#fe8868] border border-[#b8381b]/40">E_CONFIG_REJECTED</span></div><h3 class="font-headline-sm text-[18px] text-[#faf8f4] font-normal leading-snug">Byte-Identical Reproducibility</h3><p class="font-body-sm text-[12.5px] leading-relaxed text-[#b5af9f]">Given an identical seed <code class="font-meta-label text-[11px] px-1 py-0.5 bg-white/10 rounded">S ∈ [0, 2^32-1]</code>, M5 guarantees bit-for-bit parity across every platform architecture without drift.</p><p class="font-meta-label text-[11px] text-[#918b7c] leading-relaxed border-t border-white/10 pt-2.5">Violations: Allocations &gt; 8 qubits or queue overflow unconditionally trigger runtime halt with strict abort code.</p></div></div><script>
+  (function() {
+    var btn = document.getElementById('perturb-btn');
+    var v00 = document.getElementById('val-00');
+    var v11 = document.getElementById('val-11');
+    var fid = document.getElementById('fidelity-label');
+    if (!btn || !v00 || !v11 || !fid) return;
+
+    var noisy = false;
+    btn.addEventListener('click', function() {
+      noisy = !noisy;
+      if (noisy) {
+        v00.textContent = '0.4912';
+        v11.textContent = '0.4908';
+        fid.textContent = 'State Fidelity: 0.9820';
+        btn.querySelector('span:last-child').textContent = 'Restore Coherence';
+      } else {
+        v00.textContent = '0.5000';
+        v11.textContent = '0.5000';
+        fid.textContent = 'State Fidelity: 1.0000';
+        btn.querySelector('span:last-child').textContent = 'Sample Perturbation';
+      }
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#faf8f4]/95 backdrop-blur-md border-t border-[#e6e1d7]"><div class="flex items-center justify-around h-14 px-2"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-primary font-medium" data-path="overview" href="#"><span class="material-symbols-outlined text-[19px]">grid_view</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="workspace" href="#"><span class="material-symbols-outlined text-[19px]">memory</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Workspace</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="runs" href="#"><span class="material-symbols-outlined text-[19px]">play_arrow</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Runs</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[19px]">insights</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="docs" href="#"><span class="material-symbols-outlined text-[19px]">menu_book</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Docs</span></a></div></nav></body></html>

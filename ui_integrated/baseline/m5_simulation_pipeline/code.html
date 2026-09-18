@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>M5 Simulator</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Newsreader:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#474744", "surface-container-low": "#f5f3ed", "terracotta-bright": "#C84B31", "primary-container": "#1c1c1a", "inverse-on-surface": "#f3f1eb", "ink-muted": "#6E6D68", "surface-variant": "#e4e2dd", "surface-container-highest": "#e4e2dd", "surface-tint": "#5f5e5c", "background": "#fbf9f3", "ink-secondary": "#2C2C28", "error-container": "#ffdad6", "on-secondary-fixed": "#3c0800", "error": "#ba1a1a", "on-secondary-container": "#6d1600", "on-error-container": "#93000a", "tertiary-container": "#1c1c18", "on-primary-fixed": "#1c1c1a", "on-secondary-fixed-variant": "#862306", "surface-container-lowest": "#ffffff", "surface-container-high": "#eae8e2", "on-background": "#1b1c18", "ink-primary": "#1A1A18", "on-surface": "#1b1c18", "paper-base": "#FBF9F5", "border-rule": "#E2DDD5", "secondary-fixed": "#ffdbd2", "primary-fixed-dim": "#c9c6c3", "surface-container": "#f0eee8", "on-tertiary-fixed-variant": "#474742", "on-primary-container": "#858481", "tertiary-fixed-dim": "#c9c6c0", "surface": "#fbf9f3", "on-secondary": "#ffffff", "surface-bright": "#fbf9f3", "on-surface-variant": "#474741", "secondary-fixed-dim": "#ffb4a1", "inverse-primary": "#c9c6c3", "secondary-container": "#fd7957", "on-error": "#ffffff", "slate-rule": "#C4CAD0", "on-tertiary-container": "#85847e", "paper-subtle": "#F4EFEB", "terracotta-accent": "#B44426", "primary-fixed": "#e5e2de", "outline": "#777771", "outline-variant": "#c8c7bf", "secondary": "#a63a1d", "surface-dim": "#dcdad4", "tertiary": "#000000", "slate-graph": "#748899", "tertiary-fixed": "#e5e2dc", "inverse-surface": "#30312d", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "primary": "#000000", "on-tertiary-fixed": "#1c1c18" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-lg": "2rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "mono-md": ["JetBrains Mono"], "display-lg": ["Newsreader"], "label-badge": ["JetBrains Mono"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "body-sm": ["Inter"], "mono-lg": ["JetBrains Mono"], "body-md": ["Inter"], "body-lg": ["Inter"], "display-lg-mobile": ["Newsreader"], "headline-lg-mobile": ["Newsreader"], "headline-lg": ["Newsreader"] }, "fontSize": { "mono-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "400" }], "display-lg": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }], "label-badge": ["0.6875rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "fontWeight": "500" }], "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "500" }], "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }], "mono-lg": ["0.875rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }], "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.015em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-sm"><button class="w-11 h-11 -ml-2 flex items-center justify-center text-ink-primary hover:text-terracotta-accent transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><h1 class="font-headline-sm text-headline-sm text-ink-primary font-medium tracking-tight">Execution Detail</h1></div><div class="flex items-center gap-space-sm"><span class="font-mono-md text-mono-md text-ink-muted uppercase">NODE 01</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-safe">
+<!-- Top Technical Identification & Status Banner -->
+<div class="px-gutter-sm pt-space-md pb-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-terracotta-accent text-paper-base font-label-badge text-label-badge uppercase tracking-wider font-semibold">
+          SIMULATION
+        </span>
+<span class="font-mono-md text-mono-md text-ink-muted px-1.5 py-0.5 rounded-DEFAULT bg-surface-container">
+          EXEC-ENGINE::V2.4
+        </span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded-DEFAULT bg-surface-container-high">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-terracotta-bright opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-terracotta-accent"></span>
+</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium tracking-wide uppercase">RUNNING</span>
+</div>
+</div>
+<!-- Editorial Header Block -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-ink-primary font-serif tracking-tight">
+          Simulation Job in Progress
+        </h2>
+<span class="font-mono-md text-mono-md text-ink-muted">EST 1.4s REMAINING</span>
+</div>
+<!-- Telemetry Identifiers -->
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">RUN ID:</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium bg-surface-container-low px-1.5 py-0.5 rounded">run_000842</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">REQ ID:</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium bg-surface-container-low px-1.5 py-0.5 rounded">req_000842</span>
+</div>
+</div>
+</div>
+<!-- Concurrency Allocation Metric Rack -->
+<div class="bg-surface-container-low p-space-md rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-terracotta-accent">grid_view</span>
+<span class="font-mono-md text-mono-md font-medium text-ink-primary">Slot Allocation: 1 of 4 active simulation jobs</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-muted">25% POOL LOAD</span>
+</div>
+<!-- Mini Slot Bar Graphic -->
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden flex">
+<div class="bg-terracotta-accent h-full w-1/4 rounded-full transition-all duration-500"></div>
+<div class="bg-transparent h-full w-3/4"></div>
+</div>
+<div class="flex justify-between text-ink-muted font-mono-md text-[10px] uppercase pt-0.5">
+<span>Slot 01 [BUSY]</span>
+<span>Slot 02 [IDLE]</span>
+<span>Slot 03 [IDLE]</span>
+<span>Slot 04 [IDLE]</span>
+</div>
+</div>
+</div>
+<!-- Main Pipeline Execution Ledger -->
+<div class="px-gutter-sm flex flex-col gap-space-xs my-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider font-medium">EXECUTION GRAPH PIPELINE</span>
+<span class="font-mono-md text-mono-md text-ink-muted">10 DETERMINISTIC PHASES</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden divide-y divide-surface-container-high">
+<!-- Stage 1 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">1. Input circuit admitted</span>
+<span class="font-mono-md text-[11px] text-ink-muted">QASM 3.0 parsed · AST generated</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:21:58.102</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">2. Schema validated</span>
+<span class="font-mono-md text-[11px] text-ink-muted">circuit.schema.json (Draft-07)</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:21:58.214</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">3. Configuration validated</span>
+<span class="font-mono-md text-[11px] text-ink-muted">Matrix backend engine assigned</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:21:58.330</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">4. Limits verified</span>
+<span class="font-mono-md text-[11px] text-ink-muted">2/8 qubits · 1/4 concurrency lock</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:21:58.411</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 5 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">5. Simulation admitted to local queue</span>
+<span class="font-mono-md text-[11px] text-ink-muted">Priority: Standard · Worker node 01</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:21:58.789</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 6 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm hover:bg-surface-container-lowest/80 transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-primary font-bold">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">6. State evolution executed</span>
+<span class="font-mono-md text-[11px] text-ink-muted">2^2 = 4 statevector amplitudes calc</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">14:22:01.004</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-secondary bg-surface-container px-1 rounded">Done</span>
+</div>
+</div>
+<!-- Stage 7 (ACTIVE) -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm bg-surface-container-low transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-terracotta-accent flex items-center justify-center shrink-0 mt-0.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-paper-base opacity-75"></span>
+<span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-paper-base"></span>
+</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-semibold truncate">7. Noise applied</span>
+<span class="font-mono-md text-[11px] text-terracotta-accent">Depol gate p=0.010 · Readout p=0.020</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-terracotta-accent font-medium animate-pulse">Running</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-paper-base bg-terracotta-accent px-1.5 py-0.5 rounded font-semibold">Active</span>
+</div>
+</div>
+<!-- Stage 8 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm opacity-60">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-muted">hourglass_empty</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-muted font-medium truncate">8. Finite-shot sampling</span>
+<span class="font-mono-md text-[11px] text-ink-muted">1000 shots · Seed: 42</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">--:--:--</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-muted bg-surface-container px-1 rounded">Waiting</span>
+</div>
+</div>
+<!-- Stage 9 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm opacity-60">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-muted">hourglass_empty</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-muted font-medium truncate">9. Derived analysis calculated</span>
+<span class="font-mono-md text-[11px] text-ink-muted">Bloch vectors · Purity metric</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">--:--:--</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-muted bg-surface-container px-1 rounded">Waiting</span>
+</div>
+</div>
+<!-- Stage 10 -->
+<div class="p-space-sm flex items-start justify-between gap-space-sm opacity-60">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-5 h-5 rounded-full bg-surface-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-ink-muted">lock</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium truncate">10. Finalize immutable result package</span>
+<span class="font-mono-md text-[11px] text-ink-muted">SHA-256 checksum generation</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-mono-md text-[11px] text-ink-muted">--:--:--</span>
+<span class="font-label-badge text-[9px] uppercase tracking-wide text-ink-muted bg-surface-container px-1 rounded">Waiting</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Console Log Drawer Section -->
+<div class="px-gutter-sm flex flex-col gap-space-xs mt-space-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-ink-secondary">terminal</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium uppercase">TELEMETRY STREAM</span>
+</div>
+<span class="font-mono-md text-[10px] text-terracotta-accent bg-surface-container-high px-1.5 py-0.5 rounded uppercase">LIVE STDIO</span>
+</div>
+<div class="bg-primary text-paper-base rounded-lg p-space-md shadow-sm flex flex-col gap-space-xs font-mono-md text-mono-md select-text">
+<div class="flex items-start gap-2">
+<span class="text-ink-muted shrink-0 select-none">[14:21:58]</span>
+<span class="text-surface-variant">Allocated quantum simulator core context on thread #04.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-ink-muted shrink-0 select-none">[14:22:01]</span>
+<span class="text-paper-subtle font-medium">[14:22:01 UTC] State evolution complete: norm sum = 1.00000000</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-ink-muted shrink-0 select-none">[14:22:02]</span>
+<span class="text-terracotta-bright font-medium">[14:22:02 UTC] Applying gate noise model: depolarizing (p=0.010)</span>
+</div>
+<div class="flex items-center gap-2 text-ink-muted" id="dynamic-log">
+<span class="inline-block w-2 h-3.5 bg-terracotta-bright animate-pulse"></span>
+<span class="text-[11px] tracking-wide">Synthesizing bit-flip error matrices for measurement readout...</span>
+</div>
+</div>
+</div>
+<!-- Abort Safety Panel & Control Catalyst -->
+<div class="px-gutter-sm mt-space-lg mb-space-md flex flex-col gap-space-sm">
+<div class="p-space-sm bg-surface-container-high rounded-lg flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-terracotta-accent shrink-0 mt-0.5">warning</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium">Safety Slot Release Notice</span>
+<span class="font-body-sm text-[12px] text-ink-muted">
+          Aborting will immediately forfeit the active worker slot (Slot 01), flush temporary statevectors, and release the reservation to the global cluster queue.
+        </span>
+</div>
+</div>
+<!-- Abort Button -->
+<button class="w-full py-3 px-4 rounded-lg bg-surface-container hover:bg-error-container text-ink-primary hover:text-error transition-all duration-200 flex items-center justify-center gap-2 font-mono-md text-mono-md tracking-wider uppercase font-semibold active:scale-[0.99]" id="abort-btn" onclick="handleAbort()">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Abort Simulation</span>
+</button>
+</div>
+</div>
+<script>
+  function handleAbort() {
+    const btn = document.getElementById('abort-btn');
+    if (!btn) return;
+    
+    if (confirm('Authorize simulation abort for job run_000842? Allocated slot will be vacated immediately.')) {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">progress_activity</span><span>Releasing Slot...</span>';
+      btn.classList.add('bg-error-container', 'text-error');
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span><span>Slot Released & Job Aborted</span>';
+      }, 700);
+    }
+  }
+
+  // Micro-interaction: Subtle live log ticker simulated for tactile feel
+  const logLines = [
+    'Readout fidelity matrix configured for Q0, Q1.',
+    'Accumulating Kraus operator projections...',
+    'Preparing Mersenne Twister seed #42 for distribution...'
+  ];
+  let logIndex = 0;
+  setInterval(() => {
+    const logElem = document.getElementById('dynamic-log');
+    if (logElem && logIndex < logLines.length) {
+      logElem.innerHTML = `<span class="inline-block w-2 h-3.5 bg-terracotta-bright animate-pulse shrink-0"></span><span class="text-[11px] tracking-wide">${logLines[logIndex]}</span>`;
+      logIndex++;
+    }
+  }, 4500);
+</script></main></body></html>

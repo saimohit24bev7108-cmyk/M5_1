@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>M5 Simulator — Deterministic Quantum Execution</title>
+
+<!-- Local vendored fonts -->
+<link rel="stylesheet" href="assets/css/fonts.css"/>
+<link rel="stylesheet" href="assets/css/material_symbols.css"/>
+
+<!-- Vendored Tailwind -->
+<script src="assets/js/tailwind.js"></script>
+<script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#474744", "surface-container-low": "#f5f3ed", "terracotta-bright": "#C84B31", "primary-container": "#1c1c1a", "inverse-on-surface": "#f3f1eb", "ink-muted": "#6E6D68", "surface-variant": "#e4e2dd", "surface-container-highest": "#e4e2dd", "surface-tint": "#5f5e5c", "background": "#fbf9f3", "ink-secondary": "#2C2C28", "error-container": "#ffdad6", "on-secondary-fixed": "#3c0800", "error": "#ba1a1a", "on-secondary-container": "#6d1600", "on-error-container": "#93000a", "tertiary-container": "#1c1c18", "on-primary-fixed": "#1c1c1a", "on-secondary-fixed-variant": "#862306", "surface-container-lowest": "#ffffff", "surface-container-high": "#eae8e2", "on-background": "#1b1c18", "ink-primary": "#1A1A18", "on-surface": "#1b1c18", "paper-base": "#FBF9F5", "border-rule": "#E2DDD5", "secondary-fixed": "#ffdbd2", "primary-fixed-dim": "#c9c6c3", "surface-container": "#f0eee8", "on-tertiary-fixed-variant": "#474742", "on-primary-container": "#858481", "tertiary-fixed-dim": "#c9c6c0", "surface": "#fbf9f3", "on-secondary": "#ffffff", "surface-bright": "#fbf9f3", "on-surface-variant": "#474741", "secondary-fixed-dim": "#ffb4a1", "inverse-primary": "#c9c6c3", "secondary-container": "#fd7957", "on-error": "#ffffff", "slate-rule": "#C4CAD0", "on-tertiary-container": "#85847e", "paper-subtle": "#F4EFEB", "terracotta-accent": "#B44426", "primary-fixed": "#e5e2de", "outline": "#777771", "outline-variant": "#c8c7bf", "secondary": "#a63a1d", "surface-dim": "#dcdad4", "tertiary": "#000000", "slate-graph": "#748899", "tertiary-fixed": "#e5e2dc", "inverse-surface": "#30312d", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "primary": "#000000", "on-tertiary-fixed": "#1c1c18" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-lg": "2rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "mono-md": ["JetBrains Mono"], "display-lg": ["Newsreader"], "label-badge": ["JetBrains Mono"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "body-sm": ["Inter"], "mono-lg": ["JetBrains Mono"], "body-md": ["Inter"], "body-lg": ["Inter"], "display-lg-mobile": ["Newsreader"], "headline-lg-mobile": ["Newsreader"], "headline-lg": ["Newsreader"] }, "fontSize": { "mono-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "400" }], "display-lg": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }], "label-badge": ["0.6875rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "fontWeight": "500" }], "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "500" }], "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }], "mono-lg": ["0.875rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }], "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.015em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script>
+
+<style>
+@layer base {
+  html, body { width: 100vw; margin: 0; padding: 0; }
+  body { overscroll-behavior-y: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+
+<body class="bg-surface text-on-surface antialiased">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHARED HEADER
+     ═══════════════════════════════════════════════════════════════ -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe">
+<div class="h-16 px-gutter-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-ink-primary tracking-tight font-medium">M5 Simulator</span>
+<span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded bg-paper-subtle text-ink-muted border-0">STANDALONE v1.0</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-graph"></span>
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">LOCAL</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-secondary bg-surface-container px-2 py-1 rounded" id="header-slots">SLOTS: 0/4</span>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN: OVERVIEW
+     ═══════════════════════════════════════════════════════════════ -->
+<section data-screen="overview">
+<main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-gutter-sm pt-space-md pb-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-terracotta-accent animate-pulse"></span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-ink-muted bg-paper-subtle px-2 py-0.5 rounded">SIMULATION RACK // READY</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-muted tracking-tight">EIGEN-SYS 0.98.4b</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<p class="font-mono-md text-mono-md uppercase tracking-wider text-terracotta-accent">Tome IV • Formal Monograph</p>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-primary font-serif tracking-tight leading-tight">
+        A deterministic local quantum circuit simulator
+      </h1>
+<p class="font-body-md text-body-md text-ink-muted pt-1">
+        Mathematical state evolution compiled strictly against physical constraints. Zero stochastic drift, strictly bounded memory allocations.
+      </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-sm pt-space-xs">
+<a class="flex items-center justify-center gap-2 bg-ink-primary text-paper-base px-space-md py-3 rounded text-center font-mono-lg text-mono-lg transition-transform active:scale-[0.98] shadow-sm hover:bg-terracotta-accent" href="#workspace" id="btn-open-workspace">
+<span>Open Circuit Workspace</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="flex items-center justify-center gap-2 bg-paper-subtle text-ink-primary px-space-md py-3 rounded text-center font-mono-lg text-mono-lg transition-colors hover:bg-surface-container active:scale-[0.98]" href="#docs" id="btn-explore-arch">
+<span class="material-symbols-outlined text-[18px]">architecture</span>
+<span>Explore Architecture</span>
+</a>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Topology</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Offline &amp; Local</span>
+<span class="font-mono-md text-mono-md text-ink-muted">In-memory registers</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Register Width</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Max 8 Qubits</span>
+<span class="font-mono-md text-mono-md text-ink-muted">256 state amplitudes</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Concurrency</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">4 Task Slots</span>
+<span class="font-mono-md text-mono-md text-ink-muted">Dedicated thread workers</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Integrity</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Seeded PRNG</span>
+<span class="font-mono-md text-mono-md text-ink-muted">Bit-identical parity</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm py-space-md bg-paper-subtle flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-ink-muted">FIG 01.</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Canonical Bell-State Preview</h2>
+</div>
+<span class="font-label-badge text-label-badge text-terracotta-accent bg-surface px-2 py-0.5 rounded tracking-wider uppercase">|Φ+⟩ VERIFIED</span>
+</div>
+<div class="bg-surface p-space-md rounded shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2 bg-paper-subtle/50 px-3 py-2 rounded">
+<span class="font-mono-md text-mono-md text-ink-primary uppercase tracking-tight">H(q0) • CX(q0, q1)</span>
+<span class="font-mono-md text-mono-md text-slate-graph">N = 8,192 SHOTS</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-primary font-medium tracking-tight">|00⟩ (Ground Coincidence)</span>
+<span class="text-terracotta-accent tabular-nums font-semibold" id="val-00">0.5000</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-accent transition-all duration-500 ease-out" style="width: 50.00%;" id="bar-00"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 opacity-40">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-muted">|01⟩ (Null Leakage)</span>
+<span class="text-ink-muted tabular-nums">0.0000</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-slate-graph" style="width: 0%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 opacity-40">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-muted">|10⟩ (Null Leakage)</span>
+<span class="text-ink-muted tabular-nums">0.0000</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-slate-graph" style="width: 0%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-primary font-medium tracking-tight">|11⟩ (Excited Coincidence)</span>
+<span class="text-terracotta-accent tabular-nums font-semibold" id="val-11">0.5000</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-accent transition-all duration-500 ease-out" style="width: 50.00%;" id="bar-11"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-variant font-mono-md text-mono-md text-ink-primary transition-colors active:scale-95" id="perturb-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-terracotta-accent">science</span>
+<span>Sample Perturbation</span>
+</button>
+<span class="font-mono-md text-mono-md text-ink-muted" id="fidelity-label">Fidelity: 1.0000</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm py-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-ink-muted">EXECUTION SEQUENCE</span>
+<h2 class="font-headline-md text-headline-md text-ink-primary font-serif">Deterministic Pipeline</h2>
+<p class="font-body-sm text-body-sm text-ink-muted">Six immutable stages transforming symbolic instructions into validated observation statistics.</p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">01</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Input Circuit Assembly</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Receives textual OpenQASM or abstract gate arrays mapped across initialized registers.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">02</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Validate Configuration</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Assesses width (N ≤ 8), memory budgets, and operator validity before unit allocation.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">03</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Execute Ideal Evolution</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Exact matrix multiplication across pure complex state vectors |Ψ⟩.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">04</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Apply Declared Noise</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Injects deterministic Kraus operators, bit-flip rates, and phase damping if declared.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">05</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Sample Finite Shots</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Pulls pseudorandom draws strictly against cumulative probability distribution vectors.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">06</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Finalize Result Package</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Seals counts, telemetry signatures, seed records, and runtime checksums into an immutable log.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm pb-space-xl">
+<div class="bg-primary-container text-inverse-on-surface p-space-md rounded flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">policy</span>
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-secondary-container">Hard Invariant Guarantees</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-surface font-serif">Byte-Identical Reproducibility</h3>
+<p class="font-body-sm text-body-sm text-on-primary-container">
+        Given an identical initial random seed <code class="font-mono-md text-mono-md px-1 bg-white/10 rounded">S ∈ [0, 2^32-1]</code> and instruction set, M5 guarantees bit-for-bit parity across every platform architecture.
+      </p>
+<div class="p-3 bg-black/40 rounded flex flex-col gap-1.5 mt-1">
+<div class="flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-error-container uppercase">Violation Guard</span>
+<span class="font-label-badge text-label-badge text-error-container bg-error/20 px-1.5 py-0.5 rounded">STRICT HALT</span>
+</div>
+<p class="font-mono-md text-mono-md text-surface-container-high leading-relaxed">
+          Runtime raises <span class="text-terracotta-bright font-semibold">E_CONFIG_REJECTED</span> unconditionally if declared register allocation exceeds 8 qubits or requested concurrent task worker queues overflow capacity.
+        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN: WORKSPACE
+     ═══════════════════════════════════════════════════════════════ -->
+<section data-screen="workspace" style="display:none" aria-hidden="true">
+<main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-space-md space-y-space-lg">
+<!-- Circuit Header & Metadata Banner -->
+<section class="flex flex-col space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-ink-muted">CIRCUIT SPECIFICATION // REG-02</span>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-graph animate-pulse"></span>
+<span class="font-mono-md text-mono-md text-ink-secondary">VALIDATED</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between pt-1">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-primary font-serif">Bell State Generator</h1>
+<span class="font-mono-md text-mono-md text-ink-muted">ψ = (|00⟩ + |11⟩)/√2</span>
+</div>
+<!-- Parameter Strip -->
+<div class="flex items-center gap-space-md pt-1 pb-1 overflow-x-auto text-ink-secondary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-ink-muted">memory</span>
+<span class="font-mono-md text-mono-md" id="ws-qubits">2 Qubits</span>
+</div>
+<span class="text-ink-muted font-mono-md">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-ink-muted">tune</span>
+<span class="font-mono-md text-mono-md" id="ws-ops">2 Operations</span>
+</div>
+<span class="text-ink-muted font-mono-md">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-ink-muted">layers</span>
+<span class="font-mono-md text-mono-md" id="ws-depth">Depth: 2</span>
+</div>
+</div>
+</section>
+<!-- Action Bar -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 scrollbar-none">
+<button class="flex items-center gap-1 px-3 py-2 rounded bg-primary text-on-primary font-mono-md text-mono-md whitespace-nowrap shadow-sm hover:bg-terracotta-accent transition-colors" id="btn-configure-run">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Configure &amp; Run</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-2 rounded bg-surface-container text-ink-primary font-mono-md text-mono-md whitespace-nowrap hover:bg-surface-variant transition-colors" id="btn-validate" aria-label="Validate circuit">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Validate</span>
+</button>
+<button class="flex items-center gap-1 px-3 py-2 rounded bg-surface-container text-ink-secondary font-mono-md text-mono-md whitespace-nowrap hover:bg-surface-variant transition-colors" id="btn-new" aria-label="New circuit">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>New</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-2 rounded bg-surface-container text-ink-secondary font-mono-md text-mono-md whitespace-nowrap hover:bg-surface-variant transition-colors" id="btn-import" aria-label="Import circuit">
+<span class="material-symbols-outlined text-[16px]">file_upload</span>
+<span>Import</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-2 rounded bg-surface-container text-ink-secondary font-mono-md text-mono-md whitespace-nowrap hover:bg-surface-variant transition-colors" id="btn-export" aria-label="Export circuit">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Export</span>
+</button>
+</div>
+</section>
+<!-- Gate Palette -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-ink-primary font-serif">Gate Library</span>
+<span class="font-mono-md text-mono-md text-ink-muted">TOUCH TO INSERT</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-xl">
+<div class="flex items-center justify-between gap-1 overflow-x-auto py-1">
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="I" aria-label="Identity gate"><span>I</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="X" aria-label="Pauli-X gate"><span>X</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="Y" aria-label="Pauli-Y gate"><span>Y</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="Z" aria-label="Pauli-Z gate"><span>Z</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="H" aria-label="Hadamard gate"><span>H</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="S" aria-label="Phase gate"><span>S</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[38px] h-10 rounded bg-paper-base shadow-sm hover:bg-surface-variant text-ink-primary font-mono-lg text-mono-lg font-medium transition-all active:scale-95" data-gate="T" aria-label="T gate"><span>T</span></button>
+<button class="gate-btn flex flex-col items-center justify-center min-w-[54px] h-10 rounded bg-surface-container-highest shadow-sm hover:bg-surface-variant text-ink-primary font-mono-md text-mono-md font-semibold transition-all active:scale-95" data-gate="CNOT" aria-label="CNOT gate"><span>CNOT</span></button>
+</div>
+</div>
+</section>
+<!-- Circuit Canvas Board -->
+<section class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-ink-primary font-serif">State Registers</span>
+<span class="font-label-badge text-label-badge bg-paper-subtle px-1.5 py-0.5 rounded text-ink-muted uppercase">Big-Endian Order</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-muted">T = 2 Clocks</span>
+</div>
+<!-- Interactive Canvas Card -->
+<div class="bg-paper-subtle p-space-md rounded-xl shadow-sm relative overflow-hidden">
+<!-- Step Markers Track -->
+<div class="grid grid-cols-12 gap-1 mb-4 pb-2">
+<div class="col-span-3"></div>
+<div class="col-span-4 text-center">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-ink-muted bg-surface-container px-2 py-0.5 rounded">STEP 1</span>
+</div>
+<div class="col-span-5 text-center">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-terracotta-accent bg-secondary-fixed px-2 py-0.5 rounded">STEP 2 (ACTIVE)</span>
+</div>
+</div>
+<!-- Quantum Register q0 -->
+<div class="relative flex items-center h-20">
+<div class="w-20 shrink-0 flex flex-col">
+<div class="flex items-baseline gap-1">
+<span class="font-mono-lg text-mono-lg font-semibold text-ink-primary">q[0]</span>
+<span class="font-mono-md text-mono-md text-ink-muted">|0⟩</span>
+</div>
+<span class="font-mono-md text-[10px] text-ink-muted uppercase tracking-tight">Lead Bit</span>
+</div>
+<div class="relative flex-1 flex items-center h-full">
+<div class="absolute left-0 right-0 h-[2px] bg-slate-rule rounded-full"></div>
+<!-- Step 1 Slot: Hadamard Gate -->
+<div class="relative z-10 w-1/2 flex justify-center">
+<div class="cursor-pointer flex items-center justify-center w-12 h-12 rounded bg-paper-base text-ink-primary font-headline-sm text-headline-sm font-serif shadow-sm hover:scale-105 active:scale-95 transition-all" data-op="H" data-qubit="0" data-step="1">
+              H
+            </div>
+</div>
+<!-- Step 2 Slot: CNOT Control Point -->
+<div class="relative z-10 w-1/2 flex justify-center">
+<div class="cursor-pointer relative flex items-center justify-center w-12 h-12 rounded hover:bg-surface-container-high transition-all" data-op="CNOT" data-qubit="0,1" data-step="2">
+<span class="w-4 h-4 rounded-full bg-ink-primary shadow-sm"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Vertical Entanglement Bus Wire -->
+<div class="relative flex h-8">
+<div class="w-20 shrink-0"></div>
+<div class="relative flex-1 flex items-center">
+<div class="w-1/2"></div>
+<div class="w-1/2 flex justify-center items-center">
+<div class="w-[2px] h-full bg-ink-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Quantum Register q1 -->
+<div class="relative flex items-center h-20">
+<div class="w-20 shrink-0 flex flex-col">
+<div class="flex items-baseline gap-1">
+<span class="font-mono-lg text-mono-lg font-semibold text-ink-primary">q[1]</span>
+<span class="font-mono-md text-mono-md text-ink-muted">|0⟩</span>
+</div>
+<span class="font-mono-md text-[10px] text-ink-muted uppercase tracking-tight">Target Bit</span>
+</div>
+<div class="relative flex-1 flex items-center h-full">
+<div class="absolute left-0 right-0 h-[2px] bg-slate-rule rounded-full"></div>
+<!-- Step 1 Slot: Idle -->
+<div class="relative z-10 w-1/2 flex justify-center items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-rule/60"></div>
+</div>
+<!-- Step 2 Slot: CNOT Target -->
+<div class="relative z-10 w-1/2 flex justify-center">
+<div class="cursor-pointer relative flex items-center justify-center w-12 h-12 rounded bg-paper-base shadow-sm hover:scale-105 active:scale-95 transition-all group" data-op="CNOT" data-qubit="0,1" data-step="2">
+<svg class="w-8 h-8 text-ink-primary" fill="none" viewBox="0 0 32 32">
+<circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"></circle>
+<line stroke="currentColor" stroke-width="2" x1="16" x2="16" y1="4" y2="28"></line>
+<line stroke="currentColor" stroke-width="2" x1="4" x2="28" y1="16" y2="16"></line>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Register Allocation Footer -->
+<div class="mt-4 pt-3 flex items-center justify-between text-ink-muted">
+<span class="font-mono-md text-[11px]">Wires q[2] .. q[7] unallocated</span>
+<span class="font-mono-md text-[11px] text-terracotta-accent">Entanglement Level: 1.00</span>
+</div>
+</div>
+</section>
+<!-- Validation Status Bar -->
+<section class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[14px]">done</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Circuit Validated (2/8 Qubits)</span>
+<span class="font-mono-md text-mono-md text-ink-muted">Ready for Admission to Local Simulator</span>
+</div>
+</div>
+<span class="font-label-badge text-label-badge text-ink-secondary bg-surface-container px-2 py-1 rounded uppercase">QASM 3.0</span>
+</section>
+<!-- Inspector Panel -->
+<section class="bg-paper-subtle p-space-md rounded-xl space-y-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-ink-primary font-serif">Inspector</span>
+<span class="font-label-badge text-label-badge bg-primary text-on-primary px-1.5 py-0.5 rounded" id="inspector-badge">OP #2</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-ink-muted" aria-label="View code">
+<span class="material-symbols-outlined text-[18px]">code</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-ink-muted" aria-label="More options">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</div>
+<div class="space-y-2 font-mono-md text-mono-md">
+<div class="flex justify-between py-1 bg-surface-container-lowest px-2.5 rounded">
+<span class="text-ink-muted">Gate Identifier</span>
+<span class="font-semibold text-ink-primary" id="inspector-gate">CNOT (CX)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-lowest px-2.5 rounded">
+<span class="text-ink-muted">Target Registers</span>
+<span class="font-semibold text-ink-primary" id="inspector-targets">[0, 1]</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-lowest px-2.5 rounded">
+<span class="text-ink-muted">Schema Version</span>
+<span class="text-ink-secondary">1.0-STABLE</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-lowest px-2.5 rounded">
+<span class="text-ink-muted">Unitary Dimension</span>
+<span class="text-ink-secondary">4 x 4 (2-Qubit)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-lowest px-2.5 rounded">
+<span class="text-ink-muted">Description</span>
+<span class="text-ink-secondary text-right max-w-[200px] truncate" id="inspector-desc">Controlled-NOT entangles q0 &amp; q1</span>
+</div>
+</div>
+<!-- Simulation Mode Toggle -->
+<div class="pt-2">
+<div class="flex items-center justify-between mb-2">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">Simulation Mode</span>
+<span class="font-mono-md text-[10px] text-ink-muted" id="noise-budget">FIDELITY: 100%</span>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container p-1 rounded-lg" role="radiogroup" aria-label="Simulation mode">
+<button class="flex items-center justify-center gap-1.5 py-2 rounded bg-paper-base text-ink-primary font-mono-md text-mono-md font-medium shadow-sm transition-all" id="mode-ideal" role="radio" aria-checked="true" aria-pressed="true">
+<span class="w-2 h-2 rounded-full bg-slate-graph"></span>
+<span>Ideal (Pure)</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 py-2 rounded text-ink-muted font-mono-md text-mono-md hover:text-ink-primary transition-all" id="mode-noisy" role="radio" aria-checked="false" aria-pressed="false">
+<span class="w-2 h-2 rounded-full bg-terracotta-accent"></span>
+<span>Noisy (Depol.)</span>
+</button>
+</div>
+</div>
+<!-- Execute Button -->
+<div class="pt-1">
+<button class="w-full py-3 rounded bg-primary text-on-primary flex items-center justify-center gap-2 font-mono-lg text-mono-lg font-medium shadow-md hover:bg-terracotta-accent transition-colors" id="btn-execute">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span>Execute Circuit Shots (N=1024)</span>
+</button>
+</div>
+</section>
+</div></main>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN: PIPELINE
+     ═══════════════════════════════════════════════════════════════ -->
+<section data-screen="pipeline" style="display:none" aria-hidden="true">
+<main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-safe">
+<!-- Top Banner -->
+<div class="px-gutter-sm pt-space-md pb-space-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center px-2 py-0.5 rounded-DEFAULT bg-terracotta-accent text-paper-base font-label-badge text-label-badge uppercase tracking-wider font-semibold">SIMULATION</span>
+<span class="font-mono-md text-mono-md text-ink-muted px-1.5 py-0.5 rounded-DEFAULT bg-surface-container">EXEC-ENGINE::V2.4</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded-DEFAULT bg-surface-container-high" id="pipeline-status-badge">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-terracotta-bright opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-terracotta-accent"></span>
+</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium tracking-wide uppercase" id="pipeline-status-text">RUNNING</span>
+</div>
+</div>
+<!-- Editorial Header -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between gap-space-xs">
+<h2 class="font-headline-md text-headline-md text-ink-primary font-serif tracking-tight">Simulation Job in Progress</h2>
+<span class="font-mono-md text-mono-md text-ink-muted" id="pipeline-eta">—</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 pt-1">
+<div class="flex items-center gap-1.5">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">RUN ID:</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium bg-surface-container-low px-1.5 py-0.5 rounded" id="pipeline-run-id">—</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase">REQ ID:</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium bg-surface-container-low px-1.5 py-0.5 rounded" id="pipeline-req-id">—</span>
+</div>
+</div>
+</div>
+<!-- Slot Allocation -->
+<div class="bg-surface-container-low p-space-md rounded-lg shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-terracotta-accent">grid_view</span>
+<span class="font-mono-md text-mono-md font-medium text-ink-primary">Slot Allocation: 1 of 4 active simulation jobs</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-muted">25% POOL LOAD</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden flex">
+<div class="bg-terracotta-accent h-full w-1/4 rounded-full transition-all duration-500"></div>
+<div class="bg-transparent h-full w-3/4"></div>
+</div>
+<div class="flex justify-between text-ink-muted font-mono-md text-[10px] uppercase pt-0.5">
+<span>Slot 01 [BUSY]</span><span>Slot 02 [IDLE]</span><span>Slot 03 [IDLE]</span><span>Slot 04 [IDLE]</span>
+</div>
+</div>
+</div>
+<!-- Pipeline Phases -->
+<div class="px-gutter-sm flex flex-col gap-space-xs my-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider font-medium">EXECUTION GRAPH PIPELINE</span>
+<span class="font-mono-md text-mono-md text-ink-muted">10 DETERMINISTIC PHASES</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden divide-y divide-surface-container-high" id="pipeline-phases">
+<!-- Phases will be populated by integration.js -->
+</div>
+</div>
+<!-- Telemetry Stream -->
+<div class="px-gutter-sm flex flex-col gap-space-xs mt-space-sm">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-ink-secondary">terminal</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium uppercase">TELEMETRY STREAM</span>
+</div>
+<span class="font-mono-md text-[10px] text-terracotta-accent bg-surface-container-high px-1.5 py-0.5 rounded uppercase">FIXTURE DATA</span>
+</div>
+<div class="bg-primary text-paper-base rounded-lg p-space-md shadow-sm flex flex-col gap-space-xs font-mono-md text-mono-md select-text" id="pipeline-log" aria-live="polite">
+<div class="flex items-start gap-2">
+<span class="text-ink-muted shrink-0 select-none">[--:--:--]</span>
+<span class="text-surface-variant">Awaiting simulation submission...</span>
+</div>
+</div>
+</div>
+<!-- Abort Panel -->
+<div class="px-gutter-sm mt-space-lg mb-space-md flex flex-col gap-space-sm">
+<div class="p-space-sm bg-surface-container-high rounded-lg flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-terracotta-accent shrink-0 mt-0.5">warning</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-ink-primary font-medium">Safety Slot Release Notice</span>
+<span class="font-body-sm text-[12px] text-ink-muted">
+          Aborting will immediately forfeit the active worker slot, flush temporary statevectors, and release the reservation.
+        </span>
+</div>
+</div>
+<button class="w-full py-3 px-4 rounded-lg bg-surface-container text-ink-muted transition-all duration-200 flex items-center justify-center gap-2 font-mono-md text-mono-md tracking-wider uppercase font-semibold cursor-not-allowed opacity-60" id="abort-btn" disabled aria-label="Abort simulation (unavailable in fixture mode)">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Abort Simulation (Unavailable)</span>
+</button>
+</div>
+</div></main>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCREEN: RESULT
+     ═══════════════════════════════════════════════════════════════ -->
+<section data-screen="result" style="display:none" aria-hidden="true">
+<main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Editorial Archival Header -->
+<section class="px-gutter-sm pt-space-md pb-space-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-terracotta-accent bg-paper-subtle px-2 py-0.5 rounded" id="result-label">SIMULATION</span>
+<span class="font-mono-md text-mono-md text-ink-muted flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-graph"></span>ARCHIVAL RECORD</span>
+</div>
+<div class="flex flex-col gap-1 mt-1">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-primary font-medium tracking-tight">Simulation Result</h1>
+<p class="font-body-sm text-body-sm text-ink-muted">Full quantum state reconstruction and immutable execution manifest.</p>
+</div>
+</section>
+<!-- Metadata Bar -->
+<section class="mx-gutter-sm mb-space-lg p-space-md bg-paper-subtle rounded-xl flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-ink-secondary text-[18px]">fingerprint</span>
+<span class="font-mono-lg text-mono-lg text-ink-primary font-semibold tracking-tight" id="result-run-id">—</span>
+</div>
+<span class="font-mono-md text-mono-md text-terracotta-bright bg-surface-container px-2 py-0.5 rounded font-medium" id="result-seed">SEED: — (REPRODUCIBLE)</span>
+</div>
+<div class="grid grid-cols-2 gap-x-space-md gap-y-space-xs text-ink-secondary pt-space-xs">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Engine</span>
+<span class="font-mono-md text-mono-md text-ink-primary">—</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Manifest Schema</span>
+<span class="font-mono-md text-mono-md text-ink-primary">—</span>
+</div>
+<div class="flex flex-col col-span-2">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Channel Mode</span>
+<span class="font-mono-md text-mono-md text-ink-primary" id="result-mode">—</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Shots</span>
+<span class="font-mono-md text-mono-md text-ink-primary" id="result-shots">—</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Register Format</span>
+<span class="font-mono-md text-mono-md text-ink-primary">Big-Endian Order</span>
+</div>
+</div>
+</section>
+<!-- Probability Distribution -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION I</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Probability Distribution</h2>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-md" id="result-probabilities">
+<div class="flex items-center justify-between text-ink-muted font-mono-md text-[11px]">
+<span>STATE VECTOR |Ψ⟩</span>
+<span>Awaiting result data...</span>
+</div>
+</div>
+</section>
+<!-- Histogram -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION II</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Sampled Histogram</h2>
+</div>
+<span class="font-mono-md text-mono-md text-ink-secondary bg-surface-container px-2 py-0.5 rounded" id="result-shots-badge">—</span>
+</div>
+<div class="bg-paper-subtle p-space-md rounded-xl flex flex-col gap-space-md" id="result-histogram">
+<div class="text-ink-muted font-mono-md text-[11px] text-center py-8">Awaiting result data...</div>
+</div>
+</section>
+<!-- Result Package Browser -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION III</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Result Package Browser</h2>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted" id="result-path">—</span>
+</div>
+<div class="bg-paper-subtle rounded-xl p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">description</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">run.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">schema</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">circuit.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">tune</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">configuration.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">data_object</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">result.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">bar_chart</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">histogram.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">insights</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">analysis.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">—</span>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded mt-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-semibold truncate">checksum.sha256</span>
+</div>
+<span class="font-label-badge text-[10px] uppercase tracking-wider text-ink-primary bg-surface-container-lowest px-2 py-0.5 rounded shadow-sm font-semibold">—</span>
+</div>
+</div>
+<!-- Determinism Callout -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex gap-space-sm items-start">
+<span class="material-symbols-outlined text-terracotta-accent text-[22px] mt-0.5">lock_clock</span>
+<div class="flex flex-col gap-1">
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary uppercase tracking-wide">Strict Determinism Guarantee</span>
+<p class="font-body-sm text-body-sm text-ink-secondary leading-relaxed">
+          Identical circuit, configuration, simulator version, and seed produce byte-identical results.
+        </p>
+</div>
+</div>
+</section>
+<!-- Action Cockpit -->
+<section class="px-gutter-sm flex flex-col gap-space-sm mb-space-lg">
+<button class="w-full bg-surface-container text-ink-muted font-mono-md text-mono-md uppercase tracking-wider py-3 px-space-md rounded-lg flex items-center justify-center gap-space-sm cursor-not-allowed opacity-60" id="btnDownload" type="button" disabled aria-label="Download package (unavailable in fixture mode)">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Download Package (Unavailable)</span>
+</button>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="w-full bg-surface-container text-ink-primary font-mono-md text-mono-md py-3 px-space-sm rounded-lg flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors active:scale-[0.99]" id="btnReRun" type="button">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span class="truncate">Run Again</span>
+</button>
+<button class="w-full bg-surface-container text-ink-muted font-mono-md text-mono-md py-3 px-space-sm rounded-lg flex items-center justify-center gap-1.5 cursor-not-allowed opacity-60" id="btnAnalyze" type="button" disabled aria-label="Open in analysis (unavailable)">
+<span class="material-symbols-outlined text-[18px]">auto_graph</span>
+<span class="truncate">Open in Analysis</span>
+</button>
+</div>
+</section>
+<!-- Toast Notification -->
+<div class="fixed bottom-20 left-4 right-4 z-40 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out" id="statusToast">
+<div class="bg-primary text-on-primary p-space-sm rounded-lg shadow-xl flex items-center justify-between font-mono-md text-mono-md">
+<span class="truncate" id="toastMessage">Processing...</span>
+<span class="material-symbols-outlined text-[18px] text-terracotta-bright">check_circle</span>
+</div>
+</div>
+</div></main>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SHARED BOTTOM NAV
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.03)]" aria-label="Main navigation">
+<div class="flex items-center justify-around h-16 px-space-xs">
+<a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 transition-colors text-ink-primary font-medium" data-path="overview" href="#overview" aria-label="Navigate to Overview">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="font-mono-md text-[10px] tracking-wide uppercase">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="workspace" href="#workspace" aria-label="Navigate to Workspace">
+<span class="material-symbols-outlined text-[20px]">memory</span>
+<span class="font-mono-md text-[10px] tracking-wide uppercase">Workspace</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="runs" href="#result" aria-label="Navigate to Runs">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+<span class="font-mono-md text-[10px] tracking-wide uppercase">Runs</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="analysis" href="#result" aria-label="Navigate to Analysis">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span class="font-mono-md text-[10px] tracking-wide uppercase">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="docs" href="#overview" aria-label="Navigate to Docs">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<span class="font-mono-md text-[10px] tracking-wide uppercase">Docs</span>
+</a>
+</div>
+</nav>
+
+<!-- Status region for screen reader announcements -->
+<div class="sr-only" aria-live="assertive" id="aria-status" role="status"></div>
+
+<!-- Integration Scripts (order matters: dependencies first) -->
+<script src="integration/state-store.js"></script>
+<script src="integration/fixtures.js"></script>
+<script src="integration/service-adapter.js"></script>
+<script src="integration/interaction-core.js"></script>
+<script src="integration/navigation.js"></script>
+<script src="integration/integration.js"></script>
+
+</body>
+</html>

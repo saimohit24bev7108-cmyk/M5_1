@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>M5 Simulator — Scientific Monograph Result Manifest</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fbf9f6",
+            "background": "#fbf9f6",
+            "on-surface": "#1b1c1a",
+            "on-surface-variant": "#474741",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f5f3f0",
+            "surface-container": "#efeeeb",
+            "surface-container-high": "#eae8e5",
+            "surface-container-highest": "#e4e2df",
+            "primary": "#111110",
+            "on-primary": "#ffffff",
+            "secondary": "#9b432c",
+            "secondary-container": "#fce9e4",
+            "terracotta": "#a63a1d",
+            "terracotta-tint": "#fbf1ee",
+            "terracotta-badge": "#9b432c",
+            "outline": "#777771",
+            "outline-variant": "#d9d7d0",
+            "hairline": "#e2ded7",
+            "slate-technical": "#636d77"
+          },
+          fontFamily: {
+            "display": ["Newsreader", "serif"],
+            "body": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #fbf9f6;
+      }
+      body {
+        overscroll-behavior-y: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    /* Technical scientific hatching pattern */
+    .pattern-hatch-leakage {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(166, 58, 29, 0.9),
+        rgba(166, 58, 29, 0.9) 3px,
+        rgba(255, 235, 230, 0.95) 3px,
+        rgba(255, 235, 230, 0.95) 6px
+      );
+    }
+    .pattern-hatch-ideal {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(30, 30, 28, 0.12),
+        rgba(30, 30, 28, 0.12) 2px,
+        transparent 2px,
+        transparent 5px
+      );
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-secondary/10 selection:text-secondary">
+<!-- Scientific Monograph Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/92 backdrop-blur-md border-b border-hairline/80 pt-safe">
+<div class="h-14 px-4 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-5 h-5 border border-primary/80 flex items-center justify-center font-mono text-[10px] font-semibold">M5</div>
+<span class="font-display text-[17px] tracking-tight font-medium text-primary">Quantum Monograph</span>
+<span class="font-mono text-[9.5px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant border border-hairline">STD-1.0</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-700"></span>
+<span class="font-mono text-[11px] text-on-surface-variant uppercase tracking-wider">L-04 ENGINE</span>
+</div>
+<div class="w-7 h-7 rounded-full border border-primary/20 bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[16px]">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-col relative w-full pt-16 pb-28 min-h-screen">
+<div class="flex flex-col w-full max-w-2xl mx-auto">
+<!-- 1. RESULTS ARCHIVAL HEADER -->
+<section class="px-4 pt-5 pb-4 border-b border-hairline bg-surface">
+<div class="flex items-center justify-between mb-2">
+<!-- Archival Red/Terracotta Stamp -->
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 border border-terracotta/40 bg-terracotta-tint rounded text-terracotta">
+<span class="w-1.5 h-1.5 rounded-full bg-terracotta animate-pulse"></span>
+<span class="font-mono text-[10px] font-semibold tracking-widest uppercase">SIMULATION ARCHIVE</span>
+</div>
+<!-- Immutable Validation Badge -->
+<div class="inline-flex items-center gap-1 text-[10px] font-mono tracking-wider text-emerald-800 bg-emerald-50/80 px-2 py-0.5 rounded border border-emerald-200/60">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span>SHA-256 VERIFIED IMMUTABLE</span>
+</div>
+</div>
+<div class="mt-2 flex flex-col gap-1">
+<h1 class="font-display text-3xl md:text-4xl text-primary font-normal tracking-tight leading-tight">
+            Simulation Result Manifest
+          </h1>
+<p class="font-body text-[13px] text-on-surface-variant font-normal leading-relaxed">
+            Rigorous density matrix projection, canonical shot tally, and reproducible run specification.
+          </p>
+</div>
+<!-- Archival Specimen Registry Bar -->
+<div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-hairline/90 flex flex-col gap-2.5">
+<div class="flex items-center justify-between pb-2 border-b border-hairline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+<span class="font-mono text-[13px] text-primary font-semibold tracking-tight">run_000842</span>
+<span class="font-mono text-[10.5px] text-on-surface-variant px-1.5 py-0.2 bg-surface rounded border border-hairline">UUID: 8a4b...fc09</span>
+</div>
+<span class="font-mono text-[11px] text-terracotta font-semibold bg-terracotta-tint px-2 py-0.5 rounded border border-terracotta/20">
+              Seed: 42 (VERIFIED)
+            </span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-0.5 font-mono text-[11px]">
+<div class="flex flex-col">
+<span class="text-[9.5px] uppercase tracking-wider text-slate-technical font-medium">Engine Spec</span>
+<span class="text-primary font-medium">M5-Quantum v1.0.4</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9.5px] uppercase tracking-wider text-slate-technical font-medium">Shot Registry</span>
+<span class="text-primary font-medium">N = 1,000 Exact</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9.5px] uppercase tracking-wider text-slate-technical font-medium">Register Order</span>
+<span class="text-primary font-medium">Big-Endian (|q₀q₁⟩)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[9.5px] uppercase tracking-wider text-slate-technical font-medium">Noise Model</span>
+<span class="text-primary font-medium">Depol (p=0.01)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. PROBABILITY DISTRIBUTION WITH HAIRLINE MEASUREMENT SCALES -->
+<section class="px-4 pt-5 pb-5 border-b border-hairline">
+<div class="flex items-end justify-between mb-3">
+<div>
+<span class="font-mono text-[9.5px] tracking-widest text-slate-technical uppercase font-medium">TABLE I — DENSITY ESTIMATION</span>
+<h2 class="font-display text-xl text-primary font-normal">State Vector Probability Distribution</h2>
+</div>
+<div class="flex items-center gap-3 font-mono text-[10.5px]">
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-2.5 h-0.5 bg-primary/40 inline-block"></span>
+              Ideal |Ψ⟩
+            </span>
+<span class="flex items-center gap-1.5 text-primary font-medium">
+<span class="w-2.5 h-2 bg-primary inline-block rounded-xs"></span>
+              Simulated ρ
+            </span>
+</div>
+</div>
+<div class="p-3.5 bg-surface-container-lowest rounded-lg border border-hairline shadow-xs flex flex-col gap-4">
+<!-- Hairline Measurement Axis (0.00 to 0.60) -->
+<div class="relative w-full pt-1 pb-2 border-b border-hairline/80 font-mono text-[9px] text-slate-technical select-none">
+<div class="flex justify-between items-end">
+<span>0.000</span>
+<span class="pl-4">0.125</span>
+<span>0.250</span>
+<span class="pr-4">0.375</span>
+<span class="font-semibold text-primary">0.500 [TGT]</span>
+<span>0.600</span>
+</div>
+<div class="relative w-full h-1 mt-1 flex justify-between items-end border-b border-dashed border-hairline">
+<span class="h-1 w-px bg-hairline"></span>
+<span class="h-1 w-px bg-hairline"></span>
+<span class="h-1 w-px bg-hairline"></span>
+<span class="h-1 w-px bg-hairline"></span>
+<span class="h-2 w-0.5 bg-primary/60"></span>
+<span class="h-1 w-px bg-hairline"></span>
+</div>
+</div>
+<!-- Basis States -->
+<div class="flex flex-col gap-3.5">
+<!-- |00⟩ Target Basis State -->
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline justify-between font-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary font-mono text-[13px]">|00⟩</span>
+<span class="text-[9.5px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-1.5 rounded border border-emerald-200/60">Target Basis</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-slate-technical text-[11px]">Ideal <span class="font-mono">0.5000</span></span>
+<span class="text-primary font-semibold text-[13px]">0.4850</span>
+</div>
+</div>
+<div class="relative w-full h-4 bg-surface-container rounded-sm overflow-hidden flex items-center">
+<!-- Measurement tick mark at 0.5000 (scaled relative to 0.60 max) -> (0.500/0.600)*100 = 83.33% -->
+<div class="absolute top-0 bottom-0 left-[83.33%] w-px bg-primary/70 z-10"></div>
+<!-- Simulated probability bar: (0.4850/0.600)*100 = 80.83% -->
+<div class="h-full bg-primary rounded-xs transition-all" style="width: 80.83%;"></div>
+</div>
+</div>
+<!-- |01⟩ Leakage State -->
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline justify-between font-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary font-mono text-[13px]">|01⟩</span>
+<span class="text-[9px] uppercase tracking-wider font-semibold text-terracotta bg-terracotta-tint px-1.5 py-0.2 rounded border border-terracotta/30">Leakage Error</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-slate-technical text-[11px]">Ideal <span class="font-mono">0.0000</span></span>
+<span class="text-terracotta font-semibold text-[13px]">+0.0150</span>
+</div>
+</div>
+<div class="relative w-full h-4 bg-surface-container rounded-sm overflow-hidden flex items-center">
+<div class="absolute top-0 bottom-0 left-[83.33%] w-px bg-primary/20 z-10"></div>
+<!-- Simulated bar: (0.0150/0.600)*100 = 2.5% displayed visibly as 3.2% -->
+<div class="h-full pattern-hatch-leakage rounded-xs border-r border-terracotta" style="width: 4.5%;"></div>
+</div>
+</div>
+<!-- |10⟩ Leakage State -->
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline justify-between font-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary font-mono text-[13px]">|10⟩</span>
+<span class="text-[9px] uppercase tracking-wider font-semibold text-terracotta bg-terracotta-tint px-1.5 py-0.2 rounded border border-terracotta/30">Leakage Error</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-slate-technical text-[11px]">Ideal <span class="font-mono">0.0000</span></span>
+<span class="text-terracotta font-semibold text-[13px]">+0.0140</span>
+</div>
+</div>
+<div class="relative w-full h-4 bg-surface-container rounded-sm overflow-hidden flex items-center">
+<div class="absolute top-0 bottom-0 left-[83.33%] w-px bg-primary/20 z-10"></div>
+<div class="h-full pattern-hatch-leakage rounded-xs border-r border-terracotta" style="width: 4.2%;"></div>
+</div>
+</div>
+<!-- |11⟩ Target Basis State -->
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline justify-between font-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary font-mono text-[13px]">|11⟩</span>
+<span class="text-[9.5px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-1.5 rounded border border-emerald-200/60">Target Basis</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="text-slate-technical text-[11px]">Ideal <span class="font-mono">0.5000</span></span>
+<span class="text-primary font-semibold text-[13px]">0.4860</span>
+</div>
+</div>
+<div class="relative w-full h-4 bg-surface-container rounded-sm overflow-hidden flex items-center">
+<div class="absolute top-0 bottom-0 left-[83.33%] w-px bg-primary/70 z-10"></div>
+<!-- Simulated probability bar: (0.4860/0.600)*100 = 81.00% -->
+<div class="h-full bg-primary rounded-xs transition-all" style="width: 81.00%;"></div>
+</div>
+</div>
+</div>
+<!-- Analytical Invariants and Fidelity Summary -->
+<div class="pt-2 border-t border-hairline flex flex-wrap items-center justify-between gap-2 font-mono text-[11px]">
+<span class="text-on-surface-variant">Quantum State Fidelity <span class="font-semibold text-primary">F(ρ, |Ψ⟩) = 0.97104</span></span>
+<span class="text-on-surface-variant">Trace Distance <span class="font-semibold text-primary">D = 0.02896</span></span>
+<span class="text-slate-technical">Entropy S = 0.162 bit</span>
+</div>
+</div>
+</section>
+<!-- 2. SAMPLED HISTOGRAM (SOLID & HATCHED GEOMETRIC BARS) -->
+<section class="px-4 pt-5 pb-5 border-b border-hairline">
+<div class="flex items-end justify-between mb-3">
+<div>
+<span class="font-mono text-[9.5px] tracking-widest text-slate-technical uppercase font-medium">TABLE II — PROJECTIVE MEASUREMENT</span>
+<h2 class="font-display text-xl text-primary font-normal">Sampled Shot Histogram</h2>
+</div>
+<span class="font-mono text-[11px] text-primary font-medium bg-surface-container px-2 py-0.5 rounded border border-hairline">
+            N = 1,000 SHOTS
+          </span>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-lg border border-hairline shadow-xs flex flex-col gap-4">
+<!-- Scientific Graphical Frequency Graph -->
+<div class="relative h-44 w-full pt-6 pb-2 border-b border-primary/20 flex items-end justify-around px-3 bg-surface-container-low/40 rounded">
+<!-- Gridlines & Tick Marks -->
+<div class="absolute inset-x-0 top-6 border-b border-hairline/80 flex justify-between text-[9px] font-mono text-slate-technical px-1.5">
+<span>500 Shots (50.0%)</span>
+<span class="italic">Reference Ceiling</span>
+</div>
+<div class="absolute inset-x-0 top-24 border-b border-hairline/60 flex justify-between text-[9px] font-mono text-slate-technical px-1.5">
+<span>250 Shots (25.0%)</span>
+<span>-</span>
+</div>
+<!-- |00⟩ Column (Solid) -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end w-16 group z-10">
+<span class="font-mono text-[11px] font-semibold text-primary">489</span>
+<div class="w-full bg-primary rounded-t-sm shadow-xs transition-all duration-300 relative border border-primary" style="height: 78.2%;">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] bg-primary text-white px-1 rounded">48.9%</div>
+</div>
+<span class="font-mono text-[12px] font-bold text-primary">|00⟩</span>
+</div>
+<!-- |01⟩ Column (Hatched Terracotta) -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end w-16 group z-10">
+<span class="font-mono text-[11px] font-semibold text-terracotta">14</span>
+<div class="w-full pattern-hatch-leakage rounded-t-sm border border-terracotta transition-all duration-300 relative" style="height: 7.2%;">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] bg-terracotta text-white px-1 rounded">1.4%</div>
+</div>
+<span class="font-mono text-[12px] font-semibold text-terracotta">|01⟩*</span>
+</div>
+<!-- |10⟩ Column (Hatched Terracotta) -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end w-16 group z-10">
+<span class="font-mono text-[11px] font-semibold text-terracotta">15</span>
+<div class="w-full pattern-hatch-leakage rounded-t-sm border border-terracotta transition-all duration-300 relative" style="height: 7.6%;">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] bg-terracotta text-white px-1 rounded">1.5%</div>
+</div>
+<span class="font-mono text-[12px] font-semibold text-terracotta">|10⟩*</span>
+</div>
+<!-- |11⟩ Column (Solid) -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end w-16 group z-10">
+<span class="font-mono text-[11px] font-semibold text-primary">482</span>
+<div class="w-full bg-primary rounded-t-sm shadow-xs transition-all duration-300 relative border border-primary" style="height: 77.1%;">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-mono text-[9px] bg-primary text-white px-1 rounded">48.2%</div>
+</div>
+<span class="font-mono text-[12px] font-bold text-primary">|11⟩</span>
+</div>
+</div>
+<!-- Basis Register Tally Breakdown -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono">
+<div class="p-2 bg-surface-container-low rounded border border-hairline flex flex-col">
+<span class="text-[10px] text-slate-technical uppercase">|00⟩ Basis</span>
+<span class="text-[13px] font-bold text-primary mt-0.5">489 shots</span>
+<span class="text-[10px] text-on-surface-variant font-medium">48.90% (±1.5%)</span>
+</div>
+<div class="p-2 bg-terracotta-tint/60 rounded border border-terracotta/20 flex flex-col">
+<span class="text-[10px] text-terracotta uppercase font-semibold">|01⟩ Leakage</span>
+<span class="text-[13px] font-bold text-terracotta mt-0.5">14 shots</span>
+<span class="text-[10px] text-terracotta/80 font-medium">1.40% (Noise)</span>
+</div>
+<div class="p-2 bg-terracotta-tint/60 rounded border border-terracotta/20 flex flex-col">
+<span class="text-[10px] text-terracotta uppercase font-semibold">|10⟩ Leakage</span>
+<span class="text-[13px] font-bold text-terracotta mt-0.5">15 shots</span>
+<span class="text-[10px] text-terracotta/80 font-medium">1.50% (Noise)</span>
+</div>
+<div class="p-2 bg-surface-container-low rounded border border-hairline flex flex-col">
+<span class="text-[10px] text-slate-technical uppercase">|11⟩ Basis</span>
+<span class="text-[13px] font-bold text-primary mt-0.5">482 shots</span>
+<span class="text-[10px] text-on-surface-variant font-medium">48.20% (±1.5%)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. IMMUTABLE RESULT PACKAGE BROWSER -->
+<section class="px-4 pt-5 pb-6 flex flex-col gap-4">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-mono text-[9.5px] tracking-widest text-slate-technical uppercase font-medium">SECTION III — ARTIFACT REPOSITORY</span>
+<h2 class="font-display text-xl text-primary font-normal">Immutable Result Package Browser</h2>
+</div>
+<span class="font-mono text-[11px] text-slate-technical font-medium bg-surface-container px-2 py-0.5 rounded border border-hairline">
+            runs/run_000842/
+          </span>
+</div>
+<!-- Directory Tree & Monospace Artifact List -->
+<div class="bg-surface-container-lowest rounded-lg border border-hairline shadow-xs overflow-hidden">
+<div class="px-3.5 py-2 bg-surface-container-low border-b border-hairline flex items-center justify-between text-[10.5px] font-mono text-slate-technical">
+<span>FILE OBJECT</span>
+<div class="flex items-center gap-6">
+<span>SHA-256 (HEX TRUNCATED)</span>
+<span class="w-12 text-right">SIZE</span>
+</div>
+</div>
+<div class="divide-y divide-hairline font-mono text-[11.5px]">
+<!-- run.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">terminal</span>
+<span class="font-medium text-primary truncate">run.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">a3f8019e...9b21</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">2.4 KB</span>
+</div>
+</div>
+<!-- circuit.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">account_tree</span>
+<span class="font-medium text-primary truncate">circuit.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">7c1264b0...4e03</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">4.8 KB</span>
+</div>
+</div>
+<!-- configuration.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">tune</span>
+<span class="font-medium text-primary truncate">configuration.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">d91a82c4...710e</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">1.9 KB</span>
+</div>
+</div>
+<!-- result.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">data_object</span>
+<span class="font-medium text-primary truncate">result.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">e4b2d991...884a</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">12.1 KB</span>
+</div>
+</div>
+<!-- histogram.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">bar_chart</span>
+<span class="font-medium text-primary truncate">histogram.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">b8915e77...321f</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">1.1 KB</span>
+</div>
+</div>
+<!-- analysis.json -->
+<div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-surface-container-low/50 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-slate-technical text-[18px]">insights</span>
+<span class="font-medium text-primary truncate">analysis.json</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant shrink-0">
+<span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant font-mono">52aa8014...112d</span>
+<span class="w-12 text-right text-[11px] text-slate-technical">8.7 KB</span>
+</div>
+</div>
+<!-- checksum.sha256 (Canonical Root Verifier) -->
+<div class="px-3.5 py-2.5 bg-surface-container-high/60 flex items-center justify-between border-t border-hairline font-semibold">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-mono text-primary truncate">checksum.sha256</span>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="text-[9.5px] uppercase tracking-wider text-emerald-800 bg-emerald-100/70 border border-emerald-300/80 px-2 py-0.5 rounded">
+                  AUTHENTICATED
+                </span>
+<span class="w-12 text-right text-[11px] text-primary">0.5 KB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Scientific Invariant Callout Box -->
+<div class="p-3.5 bg-surface-container-low rounded-lg border border-hairline flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock_clock</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-mono text-[11px] font-semibold text-primary uppercase tracking-wide">
+              Scientific Determinism Invariant
+            </span>
+<p class="font-body text-[12.5px] text-on-surface-variant leading-relaxed">
+              Identical circuit, configuration, simulator version, and seed produce byte-identical results.
+            </p>
+</div>
+</div>
+<!-- Action Cockpit -->
+<div class="flex flex-col gap-2 pt-1">
+<!-- Primary Download Button -->
+<button class="w-full bg-primary hover:bg-neutral-800 text-on-primary font-mono text-[12px] uppercase tracking-wider py-3.5 px-4 rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.99]" id="btnDownload" type="button">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+<span>Download Package (.zip) — 38.4 KB</span>
+</button>
+<!-- Secondary Actions -->
+<div class="grid grid-cols-2 gap-2">
+<button class="w-full bg-surface-container hover:bg-surface-container-high border border-hairline text-primary font-mono text-[11.5px] py-2.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-colors active:scale-[0.99]" id="btnReRun" type="button">
+<span class="material-symbols-outlined text-[17px]">restart_alt</span>
+<span class="truncate">Re-run (Seed: 42)</span>
+</button>
+<button class="w-full bg-surface-container hover:bg-surface-container-high border border-hairline text-primary font-mono text-[11.5px] py-2.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-colors active:scale-[0.99]" id="btnAnalyze" type="button">
+<span class="material-symbols-outlined text-[17px]">analytics</span>
+<span class="truncate">Open Analysis</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Feedback Toast Notification -->
+<div class="fixed bottom-20 left-4 right-4 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out max-w-md mx-auto" id="statusToast">
+<div class="bg-primary text-white p-3 rounded-lg shadow-xl border border-neutral-700 flex items-center justify-between font-mono text-[12px]">
+<span class="truncate" id="toastMessage">Package downloaded</span>
+<span class="material-symbols-outlined text-[18px] text-terracotta">check_circle</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Shell Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/92 backdrop-blur-md border-t border-hairline">
+<div class="flex items-center justify-around h-14 max-w-md mx-auto px-2">
+<a class="flex flex-col items-center justify-center min-w-[54px] h-11 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">grid_view</span>
+<span class="font-mono text-[9px] uppercase tracking-wider">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[54px] h-11 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">memory</span>
+<span class="font-mono text-[9px] uppercase tracking-wider">Circuit</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center min-w-[54px] h-11 text-primary font-medium border-t-2 border-primary -mt-0.5" href="#">
+<span class="material-symbols-outlined text-[19px]">receipt_long</span>
+<span class="font-mono text-[9px] uppercase tracking-wider font-semibold">Manifest</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[54px] h-11 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">insights</span>
+<span class="font-mono text-[9px] uppercase tracking-wider">Analysis</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[54px] h-11 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[19px]">menu_book</span>
+<span class="font-mono text-[9px] uppercase tracking-wider">Docs</span>
+</a>
+</div>
+</nav>
+<script>
+    const toast = document.getElementById('statusToast');
+    const toastMsg = document.getElementById('toastMessage');
+
+    function showToast(msg) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2400);
+    }
+
+    document.getElementById('btnDownload')?.addEventListener('click', () => {
+      showToast('Bundled checksum verified package: run_000842.zip');
+    });
+
+    document.getElementById('btnReRun')?.addEventListener('click', () => {
+      showToast('Executing deterministic loop: Seed 42 locked');
+    });
+
+    document.getElementById('btnAnalyze')?.addEventListener('click', () => {
+      showToast('Loading density matrix into Analysis workspace...');
+    });
+  </script>
+</body></html>

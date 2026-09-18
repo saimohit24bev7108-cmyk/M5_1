@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>M5 Simulator — Technical Humanism</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "inverse-surface": "#232320",
+        "surface-container-low": "#f7f5f0",
+        "on-surface-variant": "#57564f",
+        "error-container": "#ffdad6",
+        "on-primary": "#ffffff",
+        "surface-tint": "#5f5e5c",
+        "surface-variant": "#ebe8e2",
+        "surface-container-high": "#ebe7e0",
+        "on-surface": "#1a1a18",
+        "secondary": "#a63d23",
+        "on-background": "#1a1a18",
+        "surface-container": "#f2efe8",
+        "background": "#faf8f4",
+        "primary": "#111110",
+        "surface": "#faf8f4",
+        "paper-base": "#faf8f4",
+        "paper-subtle": "#f3f0e8",
+        "slate-rule": "#d8d3c7",
+        "border-hairline": "#e4dfd5",
+        "ink-primary": "#181816",
+        "ink-muted": "#6b6961",
+        "terracotta-accent": "#af3e24",
+        "outline-variant": "#d5d0c4"
+      },
+      fontFamily: {
+        "display-hero": ["Newsreader", "serif"],
+        "headline-lg": ["Newsreader", "serif"],
+        "headline-md": ["Newsreader", "serif"],
+        "headline-sm": ["Newsreader", "serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "body-sm": ["Inter", "sans-serif"],
+        "meta-label": ["JetBrains Mono", "monospace"],
+        "data-metric": ["JetBrains Mono", "monospace"]
+      }
+    }
+  }
+};</script><style>@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #faf8f4;
+  }
+  body {
+    overscroll-behavior-y: none;
+  }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+}
+::-webkit-scrollbar { display: none; }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-[#faf8f4] text-[#1a1a18] antialiased selection:bg-[#f0e7dc] selection:text-[#181816]"><header class="fixed top-0 w-full z-50 bg-[#faf8f4]/90 backdrop-blur-md border-b border-[#e6e1d7] pt-safe"><div class="h-14 px-4 flex items-center justify-between"><div class="flex items-center gap-2"><span class="font-display-hero text-[19px] tracking-wide text-ink-primary font-normal">M5 SIMULATOR</span><span class="font-meta-label text-[9px] tracking-[0.14em] uppercase px-1.5 py-0.5 rounded-sm bg-[#ede8de] text-ink-muted border border-[#dfd9cc]">ARCHIVE</span></div><div class="flex items-center gap-2.5"><span class="font-meta-label text-[10px] tracking-wider text-ink-muted flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#181816]"></span>STANDALONE</span><span class="font-meta-label text-[10px] tracking-wider text-ink-muted bg-[#ede9e0] px-1.5 py-0.5 rounded border border-[#dfd8cc]">v1.0 BUILD</span></div></div></header><main class="flex flex-col relative w-full pt-14 pb-24 bg-[#faf8f4] min-h-screen"><div class="px-4 pt-7 pb-5 flex flex-col gap-2 border-b border-[#e9e4da]"><div class="flex items-center justify-between"><span class="font-meta-label text-[10px] uppercase tracking-[0.16em] text-terracotta-accent font-medium">Design System // Specification</span><span class="font-meta-label text-[10px] text-ink-muted tracking-tight">TECHNICAL HUMANISM</span></div><h1 class="font-display-hero text-[34px] sm:text-[38px] leading-[1.12] tracking-[-0.02em] text-ink-primary font-normal">Precision Architecture & Visual Logic</h1><p class="font-body-md text-[14px] leading-relaxed text-ink-muted pt-1 max-w-xl">The structural and aesthetic blueprint of the M5 Simulator, merging scientific rigor with archival editorial precision.</p></div><div class="px-4 py-10 flex flex-col gap-12 max-w-4xl mx-auto w-full">
+<section class="flex flex-col gap-4">
+<h2 class="font-headline-md text-[24px] text-ink-primary tracking-tight font-normal border-b border-[#e6e1d7] pb-2">Technical Constraints</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 border border-[#e4dfd5] bg-[#faf8f4] flex flex-col gap-1">
+<span class="font-meta-label text-[10px] uppercase tracking-wider text-terracotta-accent">BOUND 01</span>
+<span class="font-body-md text-[14px] text-ink-primary">Maximum 8 Qubits per register.</span>
+</div>
+<div class="p-4 border border-[#e4dfd5] bg-[#faf8f4] flex flex-col gap-1">
+<span class="font-meta-label text-[10px] uppercase tracking-wider text-terracotta-accent">BOUND 02</span>
+<span class="font-body-md text-[14px] text-ink-primary">Maximum 4 concurrent simulation jobs.</span>
+</div>
+<div class="p-4 border border-[#e4dfd5] bg-[#faf8f4] flex flex-col gap-1">
+<span class="font-meta-label text-[10px] uppercase tracking-wider text-terracotta-accent">BOUND 03</span>
+<span class="font-body-md text-[14px] text-ink-primary">Deterministic, seeded reproducibility.</span>
+</div>
+<div class="p-4 border border-[#e4dfd5] bg-[#faf8f4] flex flex-col gap-1">
+<span class="font-meta-label text-[10px] uppercase tracking-wider text-terracotta-accent">BOUND 04</span>
+<span class="font-body-md text-[14px] text-ink-primary">Bit-identical parity across platforms.</span>
+</div>
+</div>
+</section>
+</div><script type="module" src="../integration/integration.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#faf8f4]/95 backdrop-blur-md border-t border-[#e6e1d7]"><div class="flex items-center justify-around h-14 px-2"><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[19px]">grid_view</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="workspace" href="#"><span class="material-symbols-outlined text-[19px]">memory</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Workspace</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="runs" href="#"><span class="material-symbols-outlined text-[19px]">play_arrow</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Runs</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[19px]">insights</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Analysis</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-11 gap-0.5 text-ink-primary font-medium" data-path="docs" href="#"><span class="material-symbols-outlined text-[19px]">menu_book</span><span class="font-meta-label text-[9.5px] tracking-wider uppercase">Docs</span></a></div></nav></body></html>

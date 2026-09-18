@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>M5 Simulator</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Newsreader:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#474744", "surface-container-low": "#f5f3ed", "terracotta-bright": "#C84B31", "primary-container": "#1c1c1a", "inverse-on-surface": "#f3f1eb", "ink-muted": "#6E6D68", "surface-variant": "#e4e2dd", "surface-container-highest": "#e4e2dd", "surface-tint": "#5f5e5c", "background": "#fbf9f3", "ink-secondary": "#2C2C28", "error-container": "#ffdad6", "on-secondary-fixed": "#3c0800", "error": "#ba1a1a", "on-secondary-container": "#6d1600", "on-error-container": "#93000a", "tertiary-container": "#1c1c18", "on-primary-fixed": "#1c1c1a", "on-secondary-fixed-variant": "#862306", "surface-container-lowest": "#ffffff", "surface-container-high": "#eae8e2", "on-background": "#1b1c18", "ink-primary": "#1A1A18", "on-surface": "#1b1c18", "paper-base": "#FBF9F5", "border-rule": "#E2DDD5", "secondary-fixed": "#ffdbd2", "primary-fixed-dim": "#c9c6c3", "surface-container": "#f0eee8", "on-tertiary-fixed-variant": "#474742", "on-primary-container": "#858481", "tertiary-fixed-dim": "#c9c6c0", "surface": "#fbf9f3", "on-secondary": "#ffffff", "surface-bright": "#fbf9f3", "on-surface-variant": "#474741", "secondary-fixed-dim": "#ffb4a1", "inverse-primary": "#c9c6c3", "secondary-container": "#fd7957", "on-error": "#ffffff", "slate-rule": "#C4CAD0", "on-tertiary-container": "#85847e", "paper-subtle": "#F4EFEB", "terracotta-accent": "#B44426", "primary-fixed": "#e5e2de", "outline": "#777771", "outline-variant": "#c8c7bf", "secondary": "#a63a1d", "surface-dim": "#dcdad4", "tertiary": "#000000", "slate-graph": "#748899", "tertiary-fixed": "#e5e2dc", "inverse-surface": "#30312d", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "primary": "#000000", "on-tertiary-fixed": "#1c1c18" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-lg": "2rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "mono-md": ["JetBrains Mono"], "display-lg": ["Newsreader"], "label-badge": ["JetBrains Mono"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "body-sm": ["Inter"], "mono-lg": ["JetBrains Mono"], "body-md": ["Inter"], "body-lg": ["Inter"], "display-lg-mobile": ["Newsreader"], "headline-lg-mobile": ["Newsreader"], "headline-lg": ["Newsreader"] }, "fontSize": { "mono-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "400" }], "display-lg": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }], "label-badge": ["0.6875rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "fontWeight": "500" }], "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "500" }], "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }], "mono-lg": ["0.875rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }], "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.015em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-ink-primary tracking-tight font-medium">M5 Simulator</span><span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded bg-paper-subtle text-ink-muted border-0">STANDALONE v1.0</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-graph"></span><span class="font-mono-md text-mono-md text-ink-muted uppercase">LOCAL</span></div><span class="font-mono-md text-mono-md text-ink-secondary bg-surface-container px-2 py-1 rounded">SLOTS: 1/4</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-gutter-sm pt-space-md pb-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-terracotta-accent animate-pulse"></span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-ink-muted bg-paper-subtle px-2 py-0.5 rounded">SIMULATION RACK // READY</span>
+</div>
+<span class="font-mono-md text-mono-md text-ink-muted tracking-tight">EIGEN-SYS 0.98.4b</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<p class="font-mono-md text-mono-md uppercase tracking-wider text-terracotta-accent">Tome IV • Formal Monograph</p>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-primary font-serif tracking-tight leading-tight">
+        A deterministic local quantum circuit simulator
+      </h1>
+<p class="font-body-md text-body-md text-ink-muted pt-1">
+        Mathematical state evolution compiled strictly against physical constraints. Zero stochastic drift, strictly bounded memory allocations.
+      </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-sm pt-space-xs">
+<a class="flex items-center justify-center gap-2 bg-ink-primary text-paper-base px-space-md py-3 rounded text-center font-mono-lg text-mono-lg transition-transform active:scale-[0.98] shadow-sm hover:bg-terracotta-accent" href="#">
+<span>Open Circuit Workspace</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="flex items-center justify-center gap-2 bg-paper-subtle text-ink-primary px-space-md py-3 rounded text-center font-mono-lg text-mono-lg transition-colors hover:bg-surface-container active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]">architecture</span>
+<span>Explore Architecture</span>
+</a>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Topology</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Offline &amp; Local</span>
+<span class="font-mono-md text-mono-md text-ink-muted">In-memory registers</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Register Width</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Max 8 Qubits</span>
+<span class="font-mono-md text-mono-md text-ink-muted">256 state amplitudes</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Concurrency</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">4 Task Slots</span>
+<span class="font-mono-md text-mono-md text-ink-muted">Dedicated thread workers</span>
+</div>
+<div class="p-3 bg-paper-subtle rounded flex flex-col gap-1">
+<span class="font-mono-md text-mono-md text-ink-muted uppercase tracking-wider">Integrity</span>
+<span class="font-headline-sm text-headline-sm text-ink-primary">Seeded PRNG</span>
+<span class="font-mono-md text-mono-md text-ink-muted">Bit-identical parity</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm py-space-md bg-paper-subtle flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-ink-muted">FIG 01.</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Canonical Bell-State Preview</h2>
+</div>
+<span class="font-label-badge text-label-badge text-terracotta-accent bg-surface px-2 py-0.5 rounded tracking-wider uppercase">|Φ+⟩ VERIFIED</span>
+</div>
+<div class="bg-surface p-space-md rounded shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2 bg-paper-subtle/50 px-3 py-2 rounded">
+<span class="font-mono-md text-mono-md text-ink-primary uppercase tracking-tight">H(q0) • CX(q0, q1)</span>
+<span class="font-mono-md text-mono-md text-slate-graph">N = 8,192 SHOTS</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-primary font-medium tracking-tight">|00⟩ (Ground Coincidence)</span>
+<span class="text-terracotta-accent tabular-nums font-semibold" id="val-00">0.5000</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-accent transition-all duration-500 ease-out" style="width: 50.00%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 opacity-40">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-muted">|01⟩ (Null Leakage)</span>
+<span class="text-ink-muted tabular-nums">0.0000</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-slate-graph" style="width: 0%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 opacity-40">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-muted">|10⟩ (Null Leakage)</span>
+<span class="text-ink-muted tabular-nums">0.0000</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-slate-graph" style="width: 0%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center font-mono-md text-mono-md">
+<span class="text-ink-primary font-medium tracking-tight">|11⟩ (Excited Coincidence)</span>
+<span class="text-terracotta-accent tabular-nums font-semibold" id="val-11">0.5000</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-accent transition-all duration-500 ease-out" style="width: 50.00%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-variant font-mono-md text-mono-md text-ink-primary transition-colors active:scale-95" id="perturb-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-terracotta-accent">science</span>
+<span>Sample Perturbation</span>
+</button>
+<span class="font-mono-md text-mono-md text-ink-muted" id="fidelity-label">Fidelity: 1.0000</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm py-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-ink-muted">EXECUTION SEQUENCE</span>
+<h2 class="font-headline-md text-headline-md text-ink-primary font-serif">Deterministic Pipeline</h2>
+<p class="font-body-sm text-body-sm text-ink-muted">Six immutable stages transforming symbolic instructions into validated observation statistics.</p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">01</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Input Circuit Assembly</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Receives textual OpenQASM or abstract gate arrays mapped across initialized registers.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">02</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Validate Configuration</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Assesses width (N ≤ 8), memory budgets, and operator validity before unit allocation.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">03</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Execute Ideal Evolution</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Exact matrix multiplication across pure complex state vectors |Ψ⟩.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">04</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Apply Declared Noise</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Injects deterministic Kraus operators, bit-flip rates, and phase damping if declared.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">05</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Sample Finite Shots</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Pulls pseudorandom draws strictly against cumulative probability distribution vectors.</span>
+</div>
+</div>
+<div class="flex gap-space-sm p-space-sm bg-surface-container rounded">
+<span class="font-mono-lg text-mono-lg text-terracotta-accent font-semibold w-6 shrink-0">06</span>
+<div class="flex flex-col">
+<span class="font-mono-lg text-mono-lg text-ink-primary font-medium">Finalize Result Package</span>
+<span class="font-body-sm text-body-sm text-ink-muted">Seals counts, telemetry signatures, seed records, and runtime checksums into an immutable log.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-gutter-sm pb-space-xl">
+<div class="bg-primary-container text-inverse-on-surface p-space-md rounded flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">policy</span>
+<span class="font-mono-md text-mono-md uppercase tracking-wider text-secondary-container">Hard Invariant Guarantees</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-surface font-serif">Byte-Identical Reproducibility</h3>
+<p class="font-body-sm text-body-sm text-on-primary-container">
+        Given an identical initial random seed <code class="font-mono-md text-mono-md px-1 bg-white/10 rounded">S ∈ [0, 2^32-1]</code> and instruction set, M5 guarantees bit-for-bit parity across every platform architecture.
+      </p>
+<div class="p-3 bg-black/40 rounded flex flex-col gap-1.5 mt-1">
+<div class="flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-error-container uppercase">Violation Guard</span>
+<span class="font-label-badge text-label-badge text-error-container bg-error/20 px-1.5 py-0.5 rounded">STRICT HALT</span>
+</div>
+<p class="font-mono-md text-mono-md text-surface-container-high leading-relaxed">
+          Runtime raises <span class="text-terracotta-bright font-semibold">E_CONFIG_REJECTED</span> unconditionally if declared register allocation exceeds 8 qubits or requested concurrent task worker queues overflow capacity.
+        </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    var btn = document.getElementById('perturb-btn');
+    var v00 = document.getElementById('val-00');
+    var v11 = document.getElementById('val-11');
+    var fid = document.getElementById('fidelity-label');
+    if (!btn || !v00 || !v11 || !fid) return;
+
+    var noisy = false;
+    btn.addEventListener('click', function() {
+      noisy = !noisy;
+      if (noisy) {
+        v00.textContent = '0.4912';
+        v11.textContent = '0.4908';
+        fid.textContent = 'Fidelity: 0.9820';
+        btn.querySelector('span:last-child').textContent = 'Restore Coherence';
+      } else {
+        v00.textContent = '0.5000';
+        v11.textContent = '0.5000';
+        fid.textContent = 'Fidelity: 1.0000';
+        btn.querySelector('span:last-child').textContent = 'Sample Perturbation';
+      }
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.03)]" data-active-classes="text-ink-primary font-medium"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 transition-colors text-ink-primary font-medium" data-path="overview" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="workspace" href="#"><span class="material-symbols-outlined text-[20px]">memory</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Workspace</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="runs" href="#"><span class="material-symbols-outlined text-[20px]">play_arrow</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Runs</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="docs" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Docs</span></a></div></nav></body></html>

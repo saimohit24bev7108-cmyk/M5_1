@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><title>M5 Simulator</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Newsreader:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="../assets/js/tailwind.js"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#474744", "surface-container-low": "#f5f3ed", "terracotta-bright": "#C84B31", "primary-container": "#1c1c1a", "inverse-on-surface": "#f3f1eb", "ink-muted": "#6E6D68", "surface-variant": "#e4e2dd", "surface-container-highest": "#e4e2dd", "surface-tint": "#5f5e5c", "background": "#fbf9f3", "ink-secondary": "#2C2C28", "error-container": "#ffdad6", "on-secondary-fixed": "#3c0800", "error": "#ba1a1a", "on-secondary-container": "#6d1600", "on-error-container": "#93000a", "tertiary-container": "#1c1c18", "on-primary-fixed": "#1c1c1a", "on-secondary-fixed-variant": "#862306", "surface-container-lowest": "#ffffff", "surface-container-high": "#eae8e2", "on-background": "#1b1c18", "ink-primary": "#1A1A18", "on-surface": "#1b1c18", "paper-base": "#FBF9F5", "border-rule": "#E2DDD5", "secondary-fixed": "#ffdbd2", "primary-fixed-dim": "#c9c6c3", "surface-container": "#f0eee8", "on-tertiary-fixed-variant": "#474742", "on-primary-container": "#858481", "tertiary-fixed-dim": "#c9c6c0", "surface": "#fbf9f3", "on-secondary": "#ffffff", "surface-bright": "#fbf9f3", "on-surface-variant": "#474741", "secondary-fixed-dim": "#ffb4a1", "inverse-primary": "#c9c6c3", "secondary-container": "#fd7957", "on-error": "#ffffff", "slate-rule": "#C4CAD0", "on-tertiary-container": "#85847e", "paper-subtle": "#F4EFEB", "terracotta-accent": "#B44426", "primary-fixed": "#e5e2de", "outline": "#777771", "outline-variant": "#c8c7bf", "secondary": "#a63a1d", "surface-dim": "#dcdad4", "tertiary": "#000000", "slate-graph": "#748899", "tertiary-fixed": "#e5e2dc", "inverse-surface": "#30312d", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "primary": "#000000", "on-tertiary-fixed": "#1c1c18" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-lg": "2rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-desktop": "3rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "margin": "2rem" }, "fontFamily": { "mono-md": ["JetBrains Mono"], "display-lg": ["Newsreader"], "label-badge": ["JetBrains Mono"], "headline-md": ["Newsreader"], "headline-sm": ["Newsreader"], "body-sm": ["Inter"], "mono-lg": ["JetBrains Mono"], "body-md": ["Inter"], "body-lg": ["Inter"], "display-lg-mobile": ["Newsreader"], "headline-lg-mobile": ["Newsreader"], "headline-lg": ["Newsreader"] }, "fontSize": { "mono-md": ["0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "400" }], "display-lg": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400" }], "label-badge": ["0.6875rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "fontWeight": "500" }], "headline-sm": ["1.25rem", { "lineHeight": "1.4", "fontWeight": "500" }], "body-sm": ["0.8125rem", { "lineHeight": "1.5", "fontWeight": "400" }], "mono-lg": ["0.875rem", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-md": ["0.9375rem", { "lineHeight": "1.55", "fontWeight": "400" }], "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.015em", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-ink-primary tracking-tight font-medium">M5 Simulator</span><span class="font-label-badge text-label-badge uppercase px-1.5 py-0.5 rounded bg-paper-subtle text-ink-muted border-0">STANDALONE v1.0</span></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-graph"></span><span class="font-mono-md text-mono-md text-ink-muted uppercase">LOCAL</span></div><span class="font-mono-md text-mono-md text-ink-secondary bg-surface-container px-2 py-1 rounded">SLOTS: 1/4</span><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Editorial Archival Header -->
+<section class="px-gutter-sm pt-space-md pb-space-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-terracotta-accent bg-paper-subtle px-2 py-0.5 rounded">
+        SIMULATION
+      </span>
+<span class="font-mono-md text-mono-md text-ink-muted flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-graph"></span>
+        ARCHIVAL RECORD
+      </span>
+</div>
+<div class="flex flex-col gap-1 mt-1">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-ink-primary font-medium tracking-tight">
+        Simulation Result
+      </h1>
+<p class="font-body-sm text-body-sm text-ink-muted">
+        Full quantum state reconstruction and immutable execution manifest.
+      </p>
+</div>
+</section>
+<!-- Technical Specimen Metadata Bar -->
+<section class="mx-gutter-sm mb-space-lg p-space-md bg-paper-subtle rounded-xl flex flex-col gap-space-sm shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-ink-secondary text-[18px]">fingerprint</span>
+<span class="font-mono-lg text-mono-lg text-ink-primary font-semibold tracking-tight">run_000842</span>
+</div>
+<span class="font-mono-md text-mono-md text-terracotta-bright bg-surface-container px-2 py-0.5 rounded font-medium">
+        SEED: 42 (REPRODUCIBLE)
+      </span>
+</div>
+<div class="grid grid-cols-2 gap-x-space-md gap-y-space-xs text-ink-secondary pt-space-xs">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Engine</span>
+<span class="font-mono-md text-mono-md text-ink-primary">Simulator v1.0.0</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Manifest Schema</span>
+<span class="font-mono-md text-mono-md text-ink-primary">Schema 1.0 (Strict)</span>
+</div>
+<div class="flex flex-col col-span-2">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Channel Mode</span>
+<span class="font-mono-md text-mono-md text-ink-primary">Noisy · Depolarizing p=0.01 · Readout p=0.02</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Shots</span>
+<span class="font-mono-md text-mono-md text-ink-primary">1,000 Total</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase text-ink-muted">Register Format</span>
+<span class="font-mono-md text-mono-md text-ink-primary">Big-Endian Order</span>
+</div>
+</div>
+</section>
+<!-- Visual State Comparison Tabs & Viewport -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<!-- Section Header with Toggle -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION I</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Probability Distribution</h2>
+</div>
+<div class="flex p-0.5 bg-surface-container-high rounded" id="viewToggle">
+<button class="font-mono-md text-[11px] px-2.5 py-1 rounded bg-surface-container-lowest text-ink-primary font-medium shadow-sm transition-all" id="tabOverlay" type="button">
+          Comparative
+        </button>
+<button class="font-mono-md text-[11px] px-2.5 py-1 rounded text-ink-muted transition-all" id="tabMetrics" type="button">
+          Fidelity
+        </button>
+</div>
+</div>
+<!-- Comparative Distribution Display -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between text-ink-muted font-mono-md text-[11px]">
+<span>STATE VECTOR |Ψ⟩</span>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-ink-primary"></span> Ideal</span>
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-terracotta-bright"></span> Simulated</span>
+</div>
+</div>
+<!-- State Rows -->
+<div class="flex flex-col gap-space-md">
+<!-- |00⟩ -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-baseline justify-between font-mono-md text-mono-md">
+<span class="font-semibold text-ink-primary">|00⟩</span>
+<div class="flex items-center gap-2">
+<span class="text-ink-muted text-[11px]">Ideal 0.5000</span>
+<span class="text-ink-primary font-semibold">0.4850</span>
+</div>
+</div>
+<div class="relative w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<!-- Ideal hairline marker -->
+<div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-ink-muted/40 z-10"></div>
+<!-- Simulated bar -->
+<div class="h-full bg-ink-primary rounded-full transition-all duration-700" style="width: 48.5%;"></div>
+</div>
+</div>
+<!-- |01⟩ -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-baseline justify-between font-mono-md text-mono-md">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-ink-primary">|01⟩</span>
+<span class="font-label-badge text-[9px] uppercase px-1.5 py-0.2 bg-error-container text-on-error-container rounded">Leakage</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-ink-muted text-[11px]">Ideal 0.0000</span>
+<span class="text-terracotta-accent font-semibold">0.0150</span>
+</div>
+</div>
+<div class="relative w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-bright rounded-full transition-all duration-700" style="width: 15%;"></div>
+</div>
+</div>
+<!-- |10⟩ -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-baseline justify-between font-mono-md text-mono-md">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-ink-primary">|10⟩</span>
+<span class="font-label-badge text-[9px] uppercase px-1.5 py-0.2 bg-error-container text-on-error-container rounded">Leakage</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-ink-muted text-[11px]">Ideal 0.0000</span>
+<span class="text-terracotta-accent font-semibold">0.0140</span>
+</div>
+</div>
+<div class="relative w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-terracotta-bright rounded-full transition-all duration-700" style="width: 14%;"></div>
+</div>
+</div>
+<!-- |11⟩ -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-baseline justify-between font-mono-md text-mono-md">
+<span class="font-semibold text-ink-primary">|11⟩</span>
+<div class="flex items-center gap-2">
+<span class="text-ink-muted text-[11px]">Ideal 0.5000</span>
+<span class="text-ink-primary font-semibold">0.4860</span>
+</div>
+</div>
+<div class="relative w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-ink-muted/40 z-10"></div>
+<div class="h-full bg-ink-primary rounded-full transition-all duration-700" style="width: 48.6%;"></div>
+</div>
+</div>
+</div>
+<!-- Quick Fidelity Note -->
+<div class="pt-space-xs mt-space-xs flex items-center justify-between font-mono-md text-[11px] text-ink-muted">
+<span>State Fidelity F(ρ, |Ψ⟩): <strong class="text-ink-primary">0.9710</strong></span>
+<span>Trace Dist: <strong class="text-ink-primary">0.0290</strong></span>
+</div>
+</div>
+</section>
+<!-- Sampled Shot Histogram -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION II</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Sampled Histogram</h2>
+</div>
+<span class="font-mono-md text-mono-md text-ink-secondary bg-surface-container px-2 py-0.5 rounded">
+        N=1,000 SHOTS
+      </span>
+</div>
+<div class="bg-paper-subtle p-space-md rounded-xl flex flex-col gap-space-md">
+<!-- Graphical Frequency Meter -->
+<div class="grid grid-cols-4 gap-2 items-end h-32 pt-space-md px-2 bg-surface-container-lowest rounded-lg">
+<!-- |00⟩ Column -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+<span class="font-mono-md text-[10px] text-ink-muted">489</span>
+<div class="w-full max-w-[42px] bg-ink-primary rounded-t-sm transition-all duration-500" style="height: 78%;"></div>
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary">|00⟩</span>
+</div>
+<!-- |01⟩ Column -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+<span class="font-mono-md text-[10px] text-terracotta-bright">14</span>
+<div class="w-full max-w-[42px] bg-secondary-container rounded-t-sm transition-all duration-500" style="height: 6%;"></div>
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary">|01⟩</span>
+</div>
+<!-- |10⟩ Column -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+<span class="font-mono-md text-[10px] text-terracotta-bright">15</span>
+<div class="w-full max-w-[42px] bg-secondary-container rounded-t-sm transition-all duration-500" style="height: 7%;"></div>
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary">|10⟩</span>
+</div>
+<!-- |11⟩ Column -->
+<div class="flex flex-col items-center gap-1.5 h-full justify-end group">
+<span class="font-mono-md text-[10px] text-ink-muted">482</span>
+<div class="w-full max-w-[42px] bg-ink-primary rounded-t-sm transition-all duration-500" style="height: 77%;"></div>
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary">|11⟩</span>
+</div>
+</div>
+<!-- Numerical Count Registry -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-ink-primary font-medium">|00⟩ Basis</span>
+<div class="text-right">
+<span class="font-mono-md text-mono-md font-semibold text-ink-primary">489</span>
+<span class="font-mono-md text-[11px] text-ink-muted ml-1">(48.9%)</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-ink-primary font-medium">|01⟩ Noise</span>
+<div class="text-right">
+<span class="font-mono-md text-mono-md font-semibold text-terracotta-bright">14</span>
+<span class="font-mono-md text-[11px] text-ink-muted ml-1">(1.4%)</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-ink-primary font-medium">|10⟩ Noise</span>
+<div class="text-right">
+<span class="font-mono-md text-mono-md font-semibold text-terracotta-bright">15</span>
+<span class="font-mono-md text-[11px] text-ink-muted ml-1">(1.5%)</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<span class="font-mono-md text-mono-md text-ink-primary font-medium">|11⟩ Basis</span>
+<div class="text-right">
+<span class="font-mono-md text-mono-md font-semibold text-ink-primary">482</span>
+<span class="font-mono-md text-[11px] text-ink-muted ml-1">(48.2%)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Immutable Package Browser -->
+<section class="px-gutter-sm flex flex-col gap-space-md mb-space-xl">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-md text-[10px] uppercase tracking-widest text-ink-muted">SECTION III</span>
+<h2 class="font-headline-sm text-headline-sm text-ink-primary">Result Package Browser</h2>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted">runs/run_000842/</span>
+</div>
+<!-- File Registry List -->
+<div class="bg-paper-subtle rounded-xl p-space-sm flex flex-col gap-1">
+<!-- File Row: run.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">description</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">run.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          a3f8...9b21
+        </span>
+</div>
+<!-- File Row: circuit.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">schema</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">circuit.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          7c12...4e03
+        </span>
+</div>
+<!-- File Row: configuration.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">tune</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">configuration.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          d91a...710e
+        </span>
+</div>
+<!-- File Row: result.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">data_object</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">result.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          e4b2...884a
+        </span>
+</div>
+<!-- File Row: histogram.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">bar_chart</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">histogram.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          b891...321f
+        </span>
+</div>
+<!-- File Row: analysis.json -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-muted text-[20px]">insights</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-medium truncate">analysis.json</span>
+</div>
+<span class="font-mono-md text-[11px] text-ink-muted bg-surface-container px-2 py-0.5 rounded font-mono">
+          52aa...112d
+        </span>
+</div>
+<!-- File Row: checksum.sha256 (Primary Verifier) -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container rounded mt-1">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-ink-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-mono-md text-mono-md text-ink-primary font-semibold truncate">checksum.sha256</span>
+</div>
+<span class="font-label-badge text-[10px] uppercase tracking-wider text-ink-primary bg-surface-container-lowest px-2 py-0.5 rounded shadow-sm font-semibold">
+          VERIFIED IMMUTABLE
+        </span>
+</div>
+</div>
+<!-- Archival Determinism Callout Box -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex gap-space-sm items-start">
+<span class="material-symbols-outlined text-terracotta-accent text-[22px] mt-0.5">lock_clock</span>
+<div class="flex flex-col gap-1">
+<span class="font-mono-md text-[11px] font-semibold text-ink-primary uppercase tracking-wide">
+          Strict Determinism Guarantee
+        </span>
+<p class="font-body-sm text-body-sm text-ink-secondary leading-relaxed">
+          Identical circuit, configuration, simulator version, and seed produce byte-identical results.
+        </p>
+</div>
+</div>
+</section>
+<!-- Interactive Action Cockpit -->
+<section class="px-gutter-sm flex flex-col gap-space-sm mb-space-lg">
+<!-- Download Button (Primary) -->
+<button class="w-full bg-primary text-on-primary font-mono-md text-mono-md uppercase tracking-wider py-3 px-space-md rounded-lg flex items-center justify-center gap-space-sm shadow hover:bg-terracotta-accent transition-colors active:scale-[0.99]" id="btnDownload" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Download Package (.zip)</span>
+</button>
+<!-- Secondary Action Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="w-full bg-surface-container text-ink-primary font-mono-md text-mono-md py-3 px-space-sm rounded-lg flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors active:scale-[0.99]" id="btnReRun" type="button">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span class="truncate">Run Again (Seed: 42)</span>
+</button>
+<button class="w-full bg-surface-container text-ink-primary font-mono-md text-mono-md py-3 px-space-sm rounded-lg flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors active:scale-[0.99]" id="btnAnalyze" type="button">
+<span class="material-symbols-outlined text-[18px]">auto_graph</span>
+<span class="truncate">Open in Analysis</span>
+</button>
+</div>
+</section>
+<!-- Toast Notification Overlay for Actions -->
+<div class="fixed bottom-20 left-4 right-4 z-40 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out" id="statusToast">
+<div class="bg-primary text-on-primary p-space-sm rounded-lg shadow-xl flex items-center justify-between font-mono-md text-mono-md">
+<span class="truncate" id="toastMessage">Processing archive manifest...</span>
+<span class="material-symbols-outlined text-[18px] text-terracotta-bright">check_circle</span>
+</div>
+</div>
+</div>
+<script type="module" src="../integration/integration.js"></script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.03)]" data-active-classes="text-ink-primary font-medium"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="workspace" href="#"><span class="material-symbols-outlined text-[20px]">memory</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Workspace</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 transition-colors text-ink-primary font-medium" data-path="runs" href="#"><span class="material-symbols-outlined text-[20px]">play_arrow</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Runs</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="analysis" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Analysis</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 gap-0.5 text-ink-muted hover:text-ink-primary transition-colors" data-path="docs" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-mono-md text-[10px] tracking-wide uppercase">Docs</span></a></div></nav></body></html>
