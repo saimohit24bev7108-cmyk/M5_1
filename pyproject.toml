@@ -2,4 +2,10 @@
 name = "m5-simulator"
 version = "0.1.0"
 description = "M5 Simulator Architecture Scaffold"
-dependencies = []
+dependencies = [
+    "numpy",
+    "jsonschema",
+]
+
+[tool.pylint.main]
+source-roots = ["."]
